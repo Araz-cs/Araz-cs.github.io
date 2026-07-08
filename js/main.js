@@ -1,69 +1,57 @@
 /*
-*=================================
-* Hugo UILite Portfolio v0.8
-*=================================
-*
-* Free version https://uicard.io/products/hugo-uilite
-* Pro version https://uicard.io/products/hugo-uilite-pro
-* Demo https://demo.uicard.io/hugo-uilite-portfolio-demo/
-*
-* Coded By UICardio
-*
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*
-*/
+ * Portfolio interactions — smooth nav + scroll reveal
+ */
 
-
-let menuBtn = $("#menuBar");
-
-menuBtn.click(function() {
-
-  $('.hamburger-menu').toggleClass('animate');
-
-  if ($(".secondaryMenu").hasClass("active")) {
-
-    $(".secondaryMenu").removeClass("active");
-    setTimeout(function() {
-      $(".primaryMenu").addClass("active");
-    }, 400);
-
-
-  } else {
-    $(".primaryMenu").removeClass("active");
-
-    setTimeout(function() {
-      $(".secondaryMenu").addClass("active");
-    }, 350);
-  }
-});
-
-function scrollTo(target) {
-  const top = $(target).offset().top;
-  const duration = 500;
-  const changeHash = function() {
-    location.hash = target
-  };
-  $("html, body").animate({ scrollTop: top }, duration, changeHash);
-}
-
-$(document).ready(function() {
-  var elements = $(".sidebar > .main-info *");
-
-  console.log(elements);
-
-  for (let i = 0; i < elements.length; i++) {
-    setTimeout(function() {
-      $(elements[i].tagName).addClass("bs");
-    }, (400 * i) - 90 * i);
+(function () {
+  function scrollToTarget(target) {
+    const el = document.querySelector(target);
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.pageYOffset - 24;
+    window.scrollTo({ top, behavior: "smooth" });
+    if (history.replaceState) {
+      history.replaceState(null, "", target);
+    }
   }
 
-  setTimeout(function() {
-    $(".main-content").addClass("active");
-  }, 1900);
-
-  $("#sidebar a.btn[href='#contact']").on("click", function (event) {
-    event.preventDefault();
-
-    scrollTo($.attr(this, "href"));
+  document.querySelectorAll('.site-nav a[href^="#"], a[href="#contact"]').forEach(function (link) {
+    link.addEventListener("click", function (event) {
+      const href = link.getAttribute("href");
+      if (!href || href.charAt(0) !== "#") return;
+      event.preventDefault();
+      scrollToTarget(href);
+    });
   });
-});
+
+  const reveals = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && reveals.length) {
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    );
+    reveals.forEach(function (section) {
+      observer.observe(section);
+    });
+  } else {
+    reveals.forEach(function (section) {
+      section.classList.add("is-visible");
+    });
+  }
+
+  // Skip legacy sidebar stagger when using upgraded layout
+  const sidebarItems = document.querySelectorAll(".sidebar .main-info *");
+  sidebarItems.forEach(function (item) {
+    item.classList.add("bs");
+  });
+
+  const main = document.querySelector(".main-content");
+  if (main) {
+    main.classList.add("active");
+  }
+})();
