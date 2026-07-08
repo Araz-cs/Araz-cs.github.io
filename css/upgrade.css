@@ -309,7 +309,7 @@ section.contact-panel { background: var(--paper-2); min-height: auto; }
 
 .deploy-detail-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.75rem;
   margin-top: 1rem;
 }
