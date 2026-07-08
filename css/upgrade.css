@@ -23,8 +23,8 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
-  height: 100%;
-  overflow: hidden;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body.site {
@@ -34,11 +34,6 @@ body.site {
   line-height: 1.6;
   color: var(--ink);
   background: var(--paper);
-  min-height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  overscroll-behavior-y: none;
-  scroll-behavior: smooth;
 }
 
 body.site a { color: inherit; }
@@ -550,7 +545,6 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  body.site { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }
 
@@ -666,12 +660,6 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
     height: 100vh;
     height: 100svh;
     overflow: hidden;
-    overscroll-behavior: none;
-    pointer-events: none;
-  }
-
-  body.site .sidebar > * {
-    pointer-events: auto;
   }
 
   body.site .main-content {

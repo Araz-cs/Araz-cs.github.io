@@ -30,7 +30,7 @@
     var el = document.querySelector(target);
     if (!el) return;
 
-    var top = el.getBoundingClientRect().top + window.pageYOffset - scrollOffset();
+    var top = el.getBoundingClientRect().top + window.scrollY - scrollOffset();
     window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
 
     if (history.replaceState) {
@@ -97,7 +97,7 @@
   }
 
   var scrollTicking = false;
-  window.addEventListener(
+  document.addEventListener(
     "scroll",
     function () {
       if (scrollTicking) return;
@@ -107,7 +107,7 @@
         scrollTicking = false;
       });
     },
-    { passive: true }
+    { passive: true, capture: true }
   );
 
   window.addEventListener("resize", updateActiveFromScroll, { passive: true });
@@ -119,7 +119,7 @@
       "wheel",
       function (event) {
         if (!isDesktop()) return;
-        window.scrollBy(0, event.deltaY);
+        window.scrollBy({ top: event.deltaY, left: 0, behavior: "auto" });
         event.preventDefault();
       },
       { passive: false }
