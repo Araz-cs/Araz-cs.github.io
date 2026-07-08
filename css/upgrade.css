@@ -15,7 +15,7 @@
   --radius: 18px;
   --font-body: "Inter", system-ui, sans-serif;
   --font-display: "Sora", "Montserrat", sans-serif;
-  --sidebar-width: 38%;
+  --sidebar-fixed: 400px;
   --section-pad-x: 3.5rem;
   --section-pad-y: 4rem;
 }
@@ -48,16 +48,35 @@ body.site section.aqua {
 
 body.site section { padding: var(--section-pad-y) var(--section-pad-x) !important; }
 
-/* Sidebar */
-.sidebar {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: var(--sidebar-width);
-  min-width: 300px;
-  max-width: 420px;
-  height: 100vh;
-  right: auto;
+/* Desktop shell — fixes gap between capped sidebar and %-based main */
+body.site .site-shell {
+  width: 100%;
+  min-height: 100vh;
+}
+
+@media (min-width: 993px) {
+  body.site .site-shell {
+    display: grid;
+    grid-template-columns: var(--sidebar-fixed) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+@media (min-width: 1600px) {
+  :root { --sidebar-fixed: 420px; }
+}
+
+/* Sidebar — override legacy styles.css right:552px / width:40% */
+body.site .sidebar {
+  position: relative;
+  left: auto;
+  top: auto;
+  right: auto !important;
+  bottom: auto;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto;
   z-index: 30;
   background:
     radial-gradient(circle at 20% 18%, rgba(201, 162, 39, 0.16), transparent 38%),
@@ -66,6 +85,15 @@ body.site section { padding: var(--section-pad-y) var(--section-pad-x) !importan
   padding: 2.25rem 1.75rem !important;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 993px) {
+  body.site .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100dvh;
+  }
 }
 
 .sidebar .main-info * { opacity: 1; transform: none; }
@@ -183,13 +211,13 @@ body.site section { padding: var(--section-pad-y) var(--section-pad-x) !importan
   object-fit: cover;
 }
 
-/* Main */
-.main-content {
-  width: calc(100% - var(--sidebar-width));
+/* Main — flush to sidebar, no phantom gutter */
+body.site .main-content {
+  width: 100% !important;
   min-width: 0;
-  margin-left: var(--sidebar-width);
-  max-width: none;
-  float: none;
+  margin-left: 0 !important;
+  max-width: none !important;
+  float: none !important;
 }
 
 .main-content:after,
@@ -499,31 +527,33 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
 }
 
 /* ——— iPad landscape / small laptop ——— */
-@media (max-width: 1180px) {
-  :root { --sidebar-width: 34%; --section-pad-x: 2.5rem; }
+@media (max-width: 1180px) and (min-width: 993px) {
+  :root { --sidebar-fixed: 360px; --section-pad-x: 2.5rem; }
   .blueprint-flow { grid-template-columns: repeat(3, 1fr); }
   .flow-node:nth-child(3)::after,
   .flow-node:nth-child(6)::after { display: none; }
 }
 
-/* ——— iPad portrait ——— */
+/* ——— iPad portrait & below ——— */
 @media (max-width: 992px) {
   :root { --section-pad-x: 2rem; --section-pad-y: 3.25rem; }
-  .sidebar {
+  body.site .site-shell {
+    display: block;
+  }
+  body.site .sidebar {
     position: relative;
-    width: 100%;
-    max-width: none;
-    min-width: 0;
     height: auto;
     min-height: auto;
     padding: 2rem 1.5rem 1.5rem !important;
   }
   .sidebar .site-nav { display: none; }
-  .main-content { width: 100%; margin-left: 0; }
   .blueprint-pillars { grid-template-columns: 1fr 1fr; }
   .blueprint-pillars .pillar-card:last-child { grid-column: 1 / -1; }
   .mobile-dock { display: block; }
   body.site { padding-bottom: 4.25rem; }
+  .blueprint-flow { grid-template-columns: repeat(3, 1fr); }
+  .flow-node:nth-child(3)::after,
+  .flow-node:nth-child(6)::after { display: none; }
 }
 
 /* ——— Mobile ——— */
