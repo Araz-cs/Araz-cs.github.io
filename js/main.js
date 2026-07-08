@@ -112,4 +112,17 @@
 
   window.addEventListener("resize", updateActiveFromScroll, { passive: true });
   updateActiveFromScroll();
+
+  var sidebar = document.querySelector(".sidebar");
+  if (sidebar) {
+    sidebar.addEventListener(
+      "wheel",
+      function (event) {
+        if (!isDesktop()) return;
+        window.scrollBy(0, event.deltaY);
+        event.preventDefault();
+      },
+      { passive: false }
+    );
+  }
 })();
