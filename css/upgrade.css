@@ -23,10 +23,8 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-  overflow-y: auto;
-  scrollbar-gutter: stable;
+  height: 100%;
+  overflow: hidden;
 }
 
 body.site {
@@ -36,7 +34,11 @@ body.site {
   line-height: 1.6;
   color: var(--ink);
   background: var(--paper);
-  overflow: visible;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: none;
+  scroll-behavior: smooth;
 }
 
 body.site a { color: inherit; }
@@ -548,6 +550,7 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  body.site { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }
 
@@ -661,9 +664,14 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
     top: 0;
     width: var(--sidebar-w);
     height: 100vh;
-    height: 100dvh;
+    height: 100svh;
     overflow: hidden;
     overscroll-behavior: none;
+    pointer-events: none;
+  }
+
+  body.site .sidebar > * {
+    pointer-events: auto;
   }
 
   body.site .main-content {
