@@ -1,0 +1,104 @@
+{
+  "framework": "munger-inversion-latticework-bias-first-principles",
+  "totalChecks": 19,
+  "totalFailures": 0,
+  "allPassed": true,
+  "checks": [
+    {
+      "name": "inversion: work before platform",
+      "ok": true,
+      "detail": "work@5842 platform@9942"
+    },
+    {
+      "name": "inversion: signal strip exists",
+      "ok": true,
+      "detail": "60s proof before depth"
+    },
+    {
+      "name": "inversion: no see-blueprint-above",
+      "ok": true,
+      "detail": "work cards standalone"
+    },
+    {
+      "name": "inversion: safe-deploy collapsible",
+      "ok": true,
+      "detail": "depth behind disclosure"
+    },
+    {
+      "name": "latticework: hero platform-first",
+      "ok": true,
+      "detail": "platform engineer — event pipelines, safe deploy, and transaction reconciliation"
+    },
+    {
+      "name": "latticework: billing signal above fold",
+      "ok": true,
+      "detail": "platform engineer — event-driven services, governed releases, reconciliation und"
+    },
+    {
+      "name": "latticework: transaction card in top 2",
+      "ok": true,
+      "detail": "billing-adjacent before events"
+    },
+    {
+      "name": "latticework: product card deprioritized",
+      "ok": true,
+      "detail": "secondary visual weight"
+    },
+    {
+      "name": "bias: featured cards have metrics",
+      "ok": true,
+      "detail": "metrics=2"
+    },
+    {
+      "name": "bias: linkedin primary contact",
+      "ok": true,
+      "detail": "pro contact path"
+    },
+    {
+      "name": "bias: no grad email in mailto",
+      "ok": true,
+      "detail": "removed student email friction"
+    },
+    {
+      "name": "first-principles: proof metrics >= 4",
+      "ok": true,
+      "detail": "7 yrs, 95%, 175k, cross-team, cdk"
+    },
+    {
+      "name": "first-principles: backend signals >= 6",
+      "ok": true,
+      "detail": "found=8"
+    },
+    {
+      "name": "first-principles: milestone before fabflix in earlier work",
+      "ok": true,
+      "detail": "analytical anchor first"
+    },
+    {
+      "name": "structure: nav work first",
+      "ok": true,
+      "detail": "nav order"
+    },
+    {
+      "name": "structure: mobile dock work first",
+      "ok": true,
+      "detail": "mobile nav"
+    },
+    {
+      "name": "structure: all section ids",
+      "ok": true,
+      "detail": "sections present"
+    },
+    {
+      "name": "confidential: no mag7 name-drops",
+      "ok": true,
+      "detail": "indirect positioning"
+    },
+    {
+      "name": "confidential: public-safe framing",
+      "ok": true,
+      "detail": "nda-aware"
+    }
+  ],
+  "failures": []
+}

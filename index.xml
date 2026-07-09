@@ -3,7 +3,7 @@
   <channel>
     <title>Araz Sultanian Portfolio</title>
     <link>https://araz-tech.com/</link>
-    <description>Backend and platform engineer — distributed systems, cloud infrastructure, AWS and GCP. Seven years in production.</description>
+    <description>Platform engineer — event pipelines, safe deploy, reconciliation at scale. Seven years AWS and GCP production.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://Araz-cs.github.io/index.xml" rel="self" type="application/rss+xml" />
   </channel>

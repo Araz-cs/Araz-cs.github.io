@@ -219,6 +219,87 @@ body.site section {
   margin-bottom: 0;
 }
 
+/* Signal strip — 60-second hire signal */
+section.signal-strip {
+  background: var(--ink);
+  color: #f4f1ea;
+  padding: 1.75rem var(--section-pad-x) 1.5rem;
+}
+
+.signal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.signal-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 0.85rem 0.75rem;
+  text-align: center;
+}
+
+.signal-value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1.2;
+}
+
+.signal-label {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(244, 241, 234, 0.65);
+  margin-top: 0.25rem;
+  line-height: 1.35;
+}
+
+.signal-hook {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(244, 241, 234, 0.82);
+  max-width: 48rem;
+}
+
+.sidebar-metrics {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.sidebar-metric {
+  flex: 1;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 0.45rem 0.35rem;
+}
+
+.sidebar-metric strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--gold);
+  line-height: 1.2;
+}
+
+.sidebar-metric span {
+  display: block;
+  font-size: 0.58rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(244, 241, 234, 0.55);
+  margin-top: 0.15rem;
+}
+
 /* Section backgrounds */
 section.blueprint { background: var(--paper-2); }
 section.platform-work { background: #fff; }
@@ -364,6 +445,49 @@ section.contact-panel { background: var(--paper-2); min-height: auto; }
 .pillar-card h3 { font-family: var(--font-display); font-size: 0.98rem; margin-bottom: 0.45rem; }
 .pillar-card p { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.58; }
 
+.platform-expand {
+  margin-top: 1rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.platform-expand summary {
+  cursor: pointer;
+  padding: 0.95rem 1.1rem;
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--ink);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.platform-expand summary::-webkit-details-marker { display: none; }
+
+.platform-expand summary::after {
+  content: "+";
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--teal);
+  flex-shrink: 0;
+}
+
+.platform-expand[open] summary::after { content: "−"; }
+
+.platform-expand summary:hover { background: var(--paper); }
+
+.platform-expand-body {
+  padding: 0 1.1rem 1.1rem;
+  border-top: 1px solid var(--line);
+}
+
+.platform-expand-body .deploy-pipeline { margin-top: 1rem; }
+
 /* Cards */
 .platform-card, .proof-card, .principle-card, .project-card {
   background: #fff;
@@ -409,6 +533,29 @@ section.contact-panel { background: var(--paper-2); min-height: auto; }
   line-height: 1.62;
   margin-bottom: 0.85rem;
   flex-grow: 1;
+}
+
+.platform-card .card-metric {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin-bottom: 0.75rem;
+  flex-grow: 0;
+  padding: 0.55rem 0.65rem;
+  background: var(--gold-soft);
+  border-radius: 10px;
+  border-left: 3px solid var(--gold);
+}
+
+.platform-card .card-metric strong { font-weight: 600; }
+
+.platform-card--featured {
+  border-top: 3px solid var(--teal);
+}
+
+.platform-card--secondary {
+  opacity: 0.92;
+  border-style: dashed;
 }
 
 .chip-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: auto; }
@@ -632,6 +779,8 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
 
 @media (max-width: 992px) {
   :root { --section-pad-x: 2rem; --section-pad-y: 3.25rem; }
+  .signal-grid { grid-template-columns: repeat(2, 1fr); }
+  section.signal-strip { padding: 1.35rem var(--section-pad-x) 1.25rem; }
   body.site .sidebar {
     position: relative;
     width: 100%;
@@ -660,6 +809,10 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
 
 @media (max-width: 640px) {
   :root { --section-pad-x: 1.15rem; --section-pad-y: 2.75rem; }
+  .signal-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .signal-value { font-size: 1rem; }
+  .signal-label { font-size: 0.62rem; }
+  .sidebar-metrics { gap: 0.35rem; }
   body.site .sidebar { padding: 1.5rem 1.15rem 1.25rem !important; }
   .sidebar img.rounded-circle { width: 108px; height: 108px; }
   .sidebar .heading { font-size: 1.75rem; }
@@ -704,6 +857,9 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
   body.site .sidebar {
     padding: 1.5rem 1.35rem !important;
   }
+  .sidebar-metrics { margin-bottom: 0.65rem; }
+  .sidebar-metric { padding: 0.35rem 0.25rem; }
+  .sidebar-metric strong { font-size: 0.85rem; }
   .sidebar img.rounded-circle {
     width: 96px;
     height: 96px;

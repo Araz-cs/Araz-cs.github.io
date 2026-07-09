@@ -8,8 +8,9 @@
   var DESKTOP_OFFSET = 16;
 
   var sectionIds = [
-    "blueprint",
+    "signal",
     "platform-work",
+    "platform",
     "proof",
     "experience",
     "principles",
