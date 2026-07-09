@@ -273,6 +273,10 @@ section.signal-strip {
   max-width: 48rem;
 }
 
+.mobile-profile {
+  display: none;
+}
+
 .sidebar-metrics {
   display: flex;
   gap: 0.5rem;
@@ -783,38 +787,88 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
 }
 
 @media (max-width: 992px) {
-  :root { --section-pad-x: 2rem; --section-pad-y: 3.25rem; }
+  html { scroll-behavior: auto; }
   .signal-grid { grid-template-columns: repeat(2, 1fr); }
-  section.signal-strip { padding: 1.1rem var(--section-pad-x) 1rem; }
-  .signal-hook { font-size: 0.86rem; }
-
-  body.site {
-    display: flex;
-    flex-direction: column;
-  }
-
-  body.site .main-content {
-    order: -1;
-    margin-left: 0;
-    width: 100%;
-  }
+  section.signal-strip { padding: 1rem var(--section-pad-x) 1rem; }
+  .signal-hook { font-size: 0.84rem; line-height: 1.55; }
 
   body.site .sidebar {
-    order: 0;
-    position: relative;
-    width: 100%;
-    padding: 2rem 1.5rem 1.5rem !important;
+    display: none !important;
   }
-  .sidebar .site-nav { display: none; }
-  .blueprint-pillars { grid-template-columns: 1fr 1fr; }
-  .blueprint-pillars .pillar-card:last-child { grid-column: 1 / -1; }
-  .mobile-dock { display: block; }
+
+  .mobile-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .mobile-profile-photo {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid rgba(201, 162, 39, 0.45);
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .mobile-profile-text {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .mobile-profile-name {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  .mobile-profile-role {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 0.15rem;
+  }
+
+  .mobile-profile-actions {
+    display: flex;
+    gap: 0.4rem;
+    width: 100%;
+  }
+
+  .mobile-profile-actions .btn {
+    flex: 1;
+    font-size: 0.78rem !important;
+    padding: 0.45rem 0.65rem !important;
+    border-radius: 9px;
+    text-align: center;
+  }
+
+  .mobile-profile-actions .btn-outline-light {
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    color: #fff !important;
+  }
+
   body.site .main-content {
+    margin-left: 0;
+    width: 100%;
     padding-bottom: var(--mobile-dock-space);
   }
+
+  .mobile-dock { display: block; }
+
   body.site section.contact-panel {
-    padding-bottom: calc(var(--section-pad-y) + var(--mobile-dock-space) + 1.5rem);
+    padding-bottom: calc(var(--section-pad-y) + var(--mobile-dock-space));
   }
+  .blueprint-pillars { grid-template-columns: 1fr 1fr; }
+  .blueprint-pillars .pillar-card:last-child { grid-column: 1 / -1; }
   .blueprint-flow { grid-template-columns: repeat(3, 1fr); }
   .deploy-pipeline { grid-template-columns: 1fr 1fr; }
   .deploy-detail-grid { grid-template-columns: 1fr; }
@@ -861,15 +915,17 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
     overflow: hidden;
   }
 
-  body.site .main-content {
+  section.signal-strip {
     margin-left: var(--sidebar-w);
     width: calc(100% - var(--sidebar-w));
-  }
-
-  section.signal-strip {
     position: sticky;
     top: 0;
     z-index: 20;
+  }
+
+  body.site .main-content {
+    margin-left: var(--sidebar-w);
+    width: calc(100% - var(--sidebar-w));
   }
 }
 

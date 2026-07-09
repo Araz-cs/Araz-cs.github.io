@@ -24,11 +24,13 @@ function record(round, lens, name, ok, detail = "") {
 }
 
 function inversionLens(r, lens) {
-  const mainIdx = html.indexOf("<main");
   const signalIdx = html.indexOf('id="signal"');
-  record(r, lens, "signal inside main", mainIdx >= 0 && signalIdx > mainIdx);
-  record(r, lens, "no global sticky header", !rawHtml.includes("signal-strip--global"));
-  record(r, lens, "mobile main order first", rawCss.includes("order: -1"));
+  const sidebarIdx = html.indexOf('id="sidebar"');
+  const mainIdx = html.indexOf("<main");
+  record(r, lens, "signal before sidebar in DOM", signalIdx >= 0 && signalIdx < sidebarIdx);
+  record(r, lens, "signal before main in DOM", signalIdx >= 0 && signalIdx < mainIdx);
+  record(r, lens, "mobile sidebar hidden", rawCss.includes(".sidebar") && rawCss.includes("display: none"));
+  record(r, lens, "mobile profile in signal", rawHtml.includes("mobile-profile"));
 
   const workIdx = html.indexOf('id="platform-work"');
   const platformIdx = html.indexOf('id="platform"');
