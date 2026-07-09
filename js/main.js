@@ -42,10 +42,18 @@
 
     revealSection(el);
 
-    var top = el.getBoundingClientRect().top + window.scrollY - scrollOffset();
+    var offset = scrollOffset();
+    var top = el.getBoundingClientRect().top + window.scrollY - offset;
+
+    if (!isDesktop()) {
+      var doc = document.documentElement;
+      var maxScroll = doc.scrollHeight - window.innerHeight;
+      top = Math.min(top, maxScroll);
+    }
+
     window.scrollTo({
       top: Math.max(0, top),
-      behavior: isDesktop() ? "smooth" : "smooth",
+      behavior: isDesktop() ? "smooth" : "instant",
     });
 
     if (history.replaceState) {
