@@ -9,7 +9,9 @@ import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const raw = readFileSync(join(root, "index.html"), "utf8");
+const rawHtml = readFileSync(join(root, "index.html"), "utf8");
+const rawCss = readFileSync(join(root, "css/upgrade.css"), "utf8");
+const raw = rawHtml + rawCss;
 const html = raw.toLowerCase();
 const text = html.replace(/<[^>]+>/g, " ");
 
@@ -22,9 +24,11 @@ function record(round, lens, name, ok, detail = "") {
 }
 
 function inversionLens(r, lens) {
+  const mainIdx = html.indexOf("<main");
   const signalIdx = html.indexOf('id="signal"');
-  const sidebarIdx = html.indexOf('id="sidebar"');
-  record(r, lens, "signal before sidebar", signalIdx >= 0 && signalIdx < sidebarIdx);
+  record(r, lens, "signal inside main", mainIdx >= 0 && signalIdx > mainIdx);
+  record(r, lens, "no global sticky header", !rawHtml.includes("signal-strip--global"));
+  record(r, lens, "mobile main order first", rawCss.includes("order: -1"));
 
   const workIdx = html.indexOf('id="platform-work"');
   const platformIdx = html.indexOf('id="platform"');

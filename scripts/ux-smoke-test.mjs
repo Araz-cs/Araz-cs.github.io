@@ -34,9 +34,12 @@ await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: "networkidle" });
 
 const signal = await page.locator("#signal .signal-value").first().isVisible();
 const signalFirst = await page.evaluate(() => {
-  const signal = document.getElementById("signal");
+  const main = document.querySelector(".main-content");
   const sidebar = document.getElementById("sidebar");
-  return signal && sidebar ? signal.compareDocumentPosition(sidebar) & Node.DOCUMENT_POSITION_FOLLOWING : false;
+  if (!main || !sidebar) return false;
+  const mainOrder = parseInt(getComputedStyle(main).order, 10) || 0;
+  const sidebarOrder = parseInt(getComputedStyle(sidebar).order, 10) || 0;
+  return mainOrder < sidebarOrder;
 });
 const principlesBeforePlatform = await page.evaluate(() => {
   const p = document.getElementById("principles");
@@ -60,7 +63,7 @@ const submitAboveDock = submitBox && dockBox ? submitBox.y + submitBox.height <=
 
 const checks = [
   ["signal visible", signal],
-  ["signal before sidebar in DOM", signalFirst],
+  ["main before sidebar on mobile", signalFirst],
   ["mobile work visible", workTitle],
   ["approach before platform", principlesBeforePlatform],
   ["work before platform", noBlueprintAbove],

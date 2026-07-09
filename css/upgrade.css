@@ -35,18 +35,6 @@ body.site {
   line-height: 1.6;
   color: var(--ink);
   background: var(--paper);
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr;
-  grid-template-areas:
-    "signal"
-    "frame";
-  min-height: 100vh;
-}
-
-.site-frame {
-  grid-area: frame;
-  display: contents;
 }
 
 body.site a { color: inherit; }
@@ -231,19 +219,11 @@ body.site section {
   margin-bottom: 0;
 }
 
-/* Signal strip — 60-second hire signal, always first */
-.signal-strip--global {
-  grid-area: signal;
-  position: sticky;
-  top: 0;
-  z-index: 50;
-}
-
-section.signal-strip,
-header.signal-strip {
+/* Signal strip — proof at top of main column */
+section.signal-strip {
   background: var(--ink);
   color: #f4f1ea;
-  padding: 1.75rem var(--section-pad-x) 1.5rem;
+  padding: 1.5rem var(--section-pad-x) 1.25rem;
 }
 
 .signal-inner {
@@ -805,30 +785,25 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
 @media (max-width: 992px) {
   :root { --section-pad-x: 2rem; --section-pad-y: 3.25rem; }
   .signal-grid { grid-template-columns: repeat(2, 1fr); }
-  header.signal-strip,
   section.signal-strip { padding: 1.1rem var(--section-pad-x) 1rem; }
   .signal-hook { font-size: 0.86rem; }
 
   body.site {
-    grid-template-areas:
-      "signal"
-      "sidebar"
-      "main";
-    grid-template-rows: auto auto 1fr;
+    display: flex;
+    flex-direction: column;
   }
 
-  .site-frame { display: contents; }
+  body.site .main-content {
+    order: -1;
+    margin-left: 0;
+    width: 100%;
+  }
 
   body.site .sidebar {
-    grid-area: sidebar;
+    order: 0;
     position: relative;
     width: 100%;
     padding: 2rem 1.5rem 1.5rem !important;
-  }
-  body.site .main-content {
-    grid-area: main;
-    margin-left: 0;
-    width: 100%;
   }
   .sidebar .site-nav { display: none; }
   .blueprint-pillars { grid-template-columns: 1fr 1fr; }
@@ -874,23 +849,12 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
   .mobile-dock a { font-size: 0.58rem; }
 }
 
-/* Desktop: fixed sidebar + flowing main — must be last */
+/* Desktop: fixed sidebar + single document scroll — must be last */
 @media (min-width: 993px) {
-  body.site {
-    grid-template-columns: var(--sidebar-w) 1fr;
-    grid-template-rows: auto 1fr;
-    grid-template-areas:
-      "signal signal"
-      "sidebar main";
-  }
-
-  .site-frame { display: contents; }
-
   body.site .sidebar {
-    grid-area: sidebar;
-    position: sticky;
+    position: fixed;
+    left: 0;
     top: 0;
-    align-self: start;
     width: var(--sidebar-w);
     height: 100vh;
     height: 100svh;
@@ -898,9 +862,14 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
   }
 
   body.site .main-content {
-    grid-area: main;
-    margin-left: 0;
-    width: 100%;
+    margin-left: var(--sidebar-w);
+    width: calc(100% - var(--sidebar-w));
+  }
+
+  section.signal-strip {
+    position: sticky;
+    top: 0;
+    z-index: 20;
   }
 }
 

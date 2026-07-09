@@ -29,8 +29,17 @@
     return dock.offsetHeight;
   }
 
+  function getSignalHeight() {
+    var signal = document.getElementById("signal");
+    if (!signal || !isDesktop()) return 0;
+    var style = getComputedStyle(signal);
+    if (style.position !== "sticky") return 0;
+    return signal.offsetHeight;
+  }
+
   function scrollOffset() {
-    return isDesktop() ? DESKTOP_OFFSET : getMobileDockHeight() + MOBILE_CLEARANCE;
+    if (isDesktop()) return getSignalHeight() + DESKTOP_OFFSET;
+    return getMobileDockHeight() + MOBILE_CLEARANCE;
   }
 
   function revealSection(el) {
