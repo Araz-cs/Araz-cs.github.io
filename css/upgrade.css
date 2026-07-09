@@ -27,6 +27,12 @@ html {
   overflow-x: hidden;
 }
 
+@media (max-width: 992px) {
+  html {
+    scroll-padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 body.site {
   margin: 0;
   font-family: var(--font-body);
@@ -182,6 +188,13 @@ body.site .main-content::after { display: none !important; }
 
 body.site section {
   padding: var(--section-pad-y) var(--section-pad-x);
+}
+
+@media (max-width: 992px) {
+  body.site section {
+    scroll-margin-top: 0.75rem;
+    scroll-margin-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 .section-kicker {
@@ -531,7 +544,7 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
 
 .contact-panel a { color: var(--teal); font-weight: 600; }
 
-/* Reveal — subtle, no scroll jank */
+/* Reveal — desktop only; mobile sections always visible for nav + scroll */
 .reveal {
   opacity: 0;
   transform: translateY(12px);
@@ -541,6 +554,14 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
 .reveal.is-visible {
   opacity: 1;
   transform: none;
+}
+
+@media (max-width: 992px) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -583,7 +604,12 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
 }
 
 .mobile-dock a i { display: block; font-size: 0.95rem; margin-bottom: 0.15rem; }
-.mobile-dock a.is-active, .mobile-dock a:hover { color: var(--gold); }
+.mobile-dock a.is-active {
+  color: var(--gold);
+  background: rgba(201, 162, 39, 0.12);
+}
+
+.mobile-dock a:hover { color: var(--gold); }
 
 /* ——— Breakpoints ——— */
 

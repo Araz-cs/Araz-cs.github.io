@@ -4,7 +4,7 @@
 
 (function () {
   var DESKTOP_BP = 993;
-  var MOBILE_DOCK_H = 72;
+  var MOBILE_CLEARANCE = 12;
   var DESKTOP_OFFSET = 16;
 
   var sectionIds = [
@@ -22,16 +22,31 @@
     return window.innerWidth >= DESKTOP_BP;
   }
 
+  function getMobileDockHeight() {
+    var dock = document.querySelector(".mobile-dock");
+    if (!dock || getComputedStyle(dock).display === "none") return 0;
+    return dock.offsetHeight;
+  }
+
   function scrollOffset() {
-    return isDesktop() ? DESKTOP_OFFSET : MOBILE_DOCK_H;
+    return isDesktop() ? DESKTOP_OFFSET : getMobileDockHeight() + MOBILE_CLEARANCE;
+  }
+
+  function revealSection(el) {
+    if (el) el.classList.add("is-visible");
   }
 
   function scrollToTarget(target) {
     var el = document.querySelector(target);
     if (!el) return;
 
+    revealSection(el);
+
     var top = el.getBoundingClientRect().top + window.scrollY - scrollOffset();
-    window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    window.scrollTo({
+      top: Math.max(0, top),
+      behavior: isDesktop() ? "smooth" : "smooth",
+    });
 
     if (history.replaceState) {
       history.replaceState(null, "", target);
@@ -69,7 +84,11 @@
       { threshold: 0.08, rootMargin: "0px 0px -5% 0px" }
     );
     reveals.forEach(function (section) {
-      revealObserver.observe(section);
+      if (isDesktop()) {
+        revealObserver.observe(section);
+      } else {
+        section.classList.add("is-visible");
+      }
     });
   } else {
     reveals.forEach(function (section) {
@@ -84,7 +103,7 @@
     .filter(Boolean);
 
   function updateActiveFromScroll() {
-    var marker = window.scrollY + scrollOffset() + window.innerHeight * 0.25;
+    var marker = window.scrollY + scrollOffset() + window.innerHeight * 0.2;
     var current = sections[0] ? sections[0].id : null;
 
     sections.forEach(function (section) {
