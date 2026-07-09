@@ -29,8 +29,8 @@ function inversionLens(r, lens) {
   const mainIdx = html.indexOf("<main");
   record(r, lens, "signal before sidebar in DOM", signalIdx >= 0 && signalIdx < sidebarIdx);
   record(r, lens, "signal before main in DOM", signalIdx >= 0 && signalIdx < mainIdx);
-  record(r, lens, "mobile sidebar hidden", rawCss.includes(".sidebar") && rawCss.includes("display: none"));
-  record(r, lens, "mobile profile in signal", rawHtml.includes("mobile-profile"));
+  record(r, lens, "mobile signal hook hidden", /\.signal-hook\s*\{[^}]*display:\s*none/.test(rawCss));
+  record(r, lens, "mobile compact sidebar visible", rawCss.includes("display: block !important") && rawCss.includes(".sidebar .lead"));
 
   const workIdx = html.indexOf('id="platform-work"');
   const platformIdx = html.indexOf('id="platform"');

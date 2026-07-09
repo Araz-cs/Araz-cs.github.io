@@ -273,10 +273,6 @@ section.signal-strip {
   max-width: 48rem;
 }
 
-.mobile-profile {
-  display: none;
-}
-
 .sidebar-metrics {
   display: flex;
   gap: 0.5rem;
@@ -788,72 +784,91 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
 
 @media (max-width: 992px) {
   html { scroll-behavior: auto; }
-  .signal-grid { grid-template-columns: repeat(2, 1fr); }
-  section.signal-strip { padding: 1rem var(--section-pad-x) 1rem; }
-  .signal-hook { font-size: 0.84rem; line-height: 1.55; }
+  :root { --section-pad-x: 1.5rem; --section-pad-y: 2.75rem; }
 
-  body.site .sidebar {
-    display: none !important;
+  section.signal-strip {
+    padding: 0.5rem var(--section-pad-x);
   }
 
-  .mobile-profile {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  .signal-hook {
+    display: none;
   }
 
-  .mobile-profile-photo {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    border: 2px solid rgba(201, 162, 39, 0.45);
-    object-fit: cover;
-    flex-shrink: 0;
+  .signal-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.35rem;
+    margin-bottom: 0;
   }
 
-  .mobile-profile-text {
-    flex: 1;
-    min-width: 120px;
+  .signal-item {
+    padding: 0.4rem 0.2rem;
+    border-radius: 8px;
   }
 
-  .mobile-profile-name {
-    display: block;
-    font-family: var(--font-display);
-    font-size: 1.05rem;
-    color: #fff;
+  .signal-value {
+    font-size: 0.72rem;
+  }
+
+  .signal-label {
+    font-size: 0.48rem;
+    letter-spacing: 0.04em;
+    margin-top: 0.1rem;
     line-height: 1.2;
   }
 
-  .mobile-profile-role {
-    display: block;
-    font-size: 0.72rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-top: 0.15rem;
-  }
-
-  .mobile-profile-actions {
-    display: flex;
-    gap: 0.4rem;
+  /* Compact mobile sidebar — identity + CTAs; nav lives in dock */
+  body.site .sidebar {
+    display: block !important;
+    position: static;
     width: 100%;
+    height: auto;
+    padding: 0.75rem var(--section-pad-x) 0.85rem !important;
+    overflow: visible;
   }
 
-  .mobile-profile-actions .btn {
+  .sidebar .eyebrow,
+  .sidebar .lead,
+  .sidebar .manifesto,
+  .sidebar .site-nav,
+  .sidebar .sidebar-metrics,
+  .sidebar .social {
+    display: none !important;
+  }
+
+  .sidebar .main-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.65rem;
+  }
+
+  .sidebar img.rounded-circle {
+    width: 44px !important;
+    height: 44px !important;
+    margin-bottom: 0 !important;
+    flex-shrink: 0;
+  }
+
+  .sidebar .heading {
+    font-size: 1rem;
+    margin: 0;
+    flex: 1 1 120px;
+    line-height: 1.15;
+  }
+
+  .sidebar .btn-row {
+    display: flex;
+    gap: 0.35rem;
+    width: 100%;
+    margin: 0;
+  }
+
+  .sidebar .btn-row .btn-lg {
     flex: 1;
-    font-size: 0.78rem !important;
-    padding: 0.45rem 0.65rem !important;
-    border-radius: 9px;
+    width: auto !important;
+    font-size: 0.72rem !important;
+    padding: 0.4rem 0.5rem !important;
     text-align: center;
-  }
-
-  .mobile-profile-actions .btn-outline-light {
-    border: 1px solid rgba(255, 255, 255, 0.28);
-    color: #fff !important;
   }
 
   body.site .main-content {
@@ -878,15 +893,13 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
 
 @media (max-width: 640px) {
   :root { --section-pad-x: 1.15rem; --section-pad-y: 2.75rem; }
-  .signal-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
-  .signal-value { font-size: 1rem; }
-  .signal-label { font-size: 0.62rem; }
-  .sidebar-metrics { gap: 0.35rem; }
-  body.site .sidebar { padding: 1.5rem 1.15rem 1.25rem !important; }
-  .sidebar img.rounded-circle { width: 108px; height: 108px; }
-  .sidebar .heading { font-size: 1.75rem; }
-  .sidebar .lead, .sidebar .manifesto { font-size: 0.86rem; }
-  .sidebar .btn-row .btn-lg { width: 100%; text-align: center; }
+  .signal-grid { gap: 0.3rem; }
+  .signal-value { font-size: 0.68rem; }
+  .signal-label { font-size: 0.45rem; }
+  body.site .sidebar { padding: 0.65rem var(--section-pad-x) 0.75rem !important; }
+  .sidebar img.rounded-circle { width: 40px !important; height: 40px !important; }
+  .sidebar .heading { font-size: 0.95rem; }
+  .sidebar .btn-row .btn-lg { font-size: 0.68rem !important; padding: 0.38rem 0.45rem !important; }
   .section-title { font-size: 1.45rem; }
   .section-copy { font-size: 0.94rem; }
   .blueprint-flow { grid-template-columns: 1fr 1fr; gap: 0.55rem; }
