@@ -33,6 +33,16 @@ const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
 await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: "networkidle" });
 
 const signal = await page.locator("#signal .signal-value").first().isVisible();
+const signalFirst = await page.evaluate(() => {
+  const signal = document.getElementById("signal");
+  const sidebar = document.getElementById("sidebar");
+  return signal && sidebar ? signal.compareDocumentPosition(sidebar) & Node.DOCUMENT_POSITION_FOLLOWING : false;
+});
+const principlesBeforePlatform = await page.evaluate(() => {
+  const p = document.getElementById("principles");
+  const plat = document.getElementById("platform");
+  return p && plat ? p.offsetTop < plat.offsetTop : false;
+});
 const workTitle = await page.locator("#platform-work .section-title").isVisible();
 const workTop = await page.locator("#platform-work").evaluate((el) => el.getBoundingClientRect().top);
 const platformTop = await page.locator("#platform").evaluate((el) => el.getBoundingClientRect().top);
@@ -47,8 +57,10 @@ const dockBox = await page.locator(".mobile-dock").boundingBox();
 const submitAboveDock = submitBox && dockBox ? submitBox.y + submitBox.height <= dockBox.y + 2 : false;
 
 const checks = [
-  ["mobile signal visible", signal],
+  ["signal visible", signal],
+  ["signal before sidebar in DOM", signalFirst],
   ["mobile work visible", workTitle],
+  ["approach before platform", principlesBeforePlatform],
   ["work before platform", noBlueprintAbove],
   ["featured cards >= 2", featured >= 2],
   ["contact submit visible", submitVisible],

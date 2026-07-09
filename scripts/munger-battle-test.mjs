@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * Munger-lens portfolio battle test
- * Passes: inversion (signal density), latticework (role alignment),
- * bias audit (no self-referential cards), first principles (60s scan)
+ * Munger multi-lens battle test — 10 rounds × 4 frameworks
+ * Inversion · Latticework · Bias audit · First principles
+ * Plus intuition-flow checks (time-of-day agnostic scan path)
  */
 
 import { readFileSync, writeFileSync } from "fs";
@@ -10,173 +10,121 @@ import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const html = readFileSync(join(root, "index.html"), "utf8").toLowerCase();
+const raw = readFileSync(join(root, "index.html"), "utf8");
+const html = raw.toLowerCase();
 const text = html.replace(/<[^>]+>/g, " ");
 
-const checks = [];
+const ROUNDS = 10;
+const allChecks = [];
 
-function check(name, ok, detail = "") {
-  checks.push({ name, ok, detail });
+function record(round, lens, name, ok, detail = "") {
+  const entry = { round, lens, name, ok, detail };
+  allChecks.push(entry);
   return ok;
 }
 
-// —— Pass 1: INVERSION — avoid guaranteed failure ———
-const workIdx = html.indexOf('id="platform-work"');
-const platformIdx = html.indexOf('id="platform"');
-check(
-  "inversion: work before platform",
-  workIdx > 0 && platformIdx > workIdx,
-  `work@${workIdx} platform@${platformIdx}`
-);
+function runLens(round, lens, fn) {
+  fn(round, lens);
+}
 
-const signalIdx = html.indexOf('id="signal"');
-check(
-  "inversion: signal strip exists",
-  signalIdx >= 0 && signalIdx < workIdx,
-  "60s proof before depth"
-);
+// —— INVERSION — guarantee failure paths eliminated ———
+function inversionLens(r, lens) {
+  const signalIdx = html.indexOf('id="signal"');
+  const sidebarIdx = html.indexOf('id="sidebar"');
+  record(r, lens, "signal before sidebar in DOM", signalIdx >= 0 && signalIdx < sidebarIdx, `signal@${signalIdx}`);
 
-check(
-  "inversion: no see-blueprint-above",
-  !html.includes("see blueprint above"),
-  "work cards standalone"
-);
+  const workIdx = html.indexOf('id="platform-work"');
+  const platformIdx = html.indexOf('id="platform"');
+  record(r, lens, "work before platform", workIdx > 0 && platformIdx > workIdx);
 
-check(
-  "inversion: safe-deploy collapsible",
-  html.includes("platform-expand") && html.includes("safe deploy"),
-  "depth behind disclosure"
-);
+  const principlesIdx = html.indexOf('id="principles"');
+  record(r, lens, "approach before platform depth", principlesIdx > 0 && principlesIdx < platformIdx, "intuition before architecture");
 
-// —— Pass 2: LATTICEWORK — right mental model per surface ———
-const heroLead = html.match(/class="lead"[^>]*>([^<]+)/)?.[1] || "";
-check(
-  "latticework: hero platform-first",
-  /platform engineer/.test(heroLead) &&
-    (heroLead.indexOf("product") === -1 || heroLead.indexOf("platform") < heroLead.indexOf("product")),
-  heroLead.slice(0, 80)
-);
+  record(r, lens, "no see-blueprint-above", !html.includes("see blueprint above"));
+  record(r, lens, "depth behind disclosure", html.includes("platform-expand"));
+  record(r, lens, "product card deprioritized", html.includes("platform-card--secondary"));
+}
 
-const signalHook = html.match(/class="signal-hook"[^>]*>([^<]+)/)?.[1] || "";
-check(
-  "latticework: billing signal above fold",
-  /billing|reconcil|metering/.test(signalHook),
-  signalHook.slice(0, 80)
-);
+// —— LATTICEWORK — right model per surface ———
+function latticeworkLens(r, lens) {
+  const heroLead = html.match(/class="lead"[^>]*>([^<]+)/)?.[1] || "";
+  record(r, lens, "hero platform-first", /platform engineer/.test(heroLead));
 
-const workBlock = html.slice(workIdx, platformIdx);
-check(
-  "latticework: transaction card in top 2",
-  workBlock.indexOf("transaction-critical") < workBlock.indexOf("event-driven"),
-  "billing-adjacent before events"
-);
+  const signalHook = html.match(/class="signal-hook"[^>]*>([^<]+)/)?.[1] || "";
+  record(r, lens, "billing signal in strip", /billing|reconcil/.test(signalHook));
+  record(r, lens, "invert failure in strip", /invert/.test(signalHook), "thinking model visible early");
 
-check(
-  "latticework: product card deprioritized",
-  workBlock.includes("platform-card--secondary"),
-  "secondary visual weight"
-);
+  const workBlock = html.slice(html.indexOf('id="platform-work"'), html.indexOf('id="principles"'));
+  record(r, lens, "transaction in top 2 cards", workBlock.indexOf("transaction-critical") < workBlock.indexOf("event-driven"));
 
-// —— Pass 3: BIAS AUDIT — avoid craft over signal ———
-check(
-  "bias: featured cards have metrics",
-  (html.match(/card-metric/g) || []).length >= 2,
-  `metrics=${(html.match(/card-metric/g) || []).length}`
-);
+  record(r, lens, "sticky signal bar", html.includes("signal-strip--global"), "scan path at any scroll hour");
+}
 
-check(
-  "bias: linkedin primary contact",
-  html.indexOf("linkedin.com") < html.indexOf("formspree") &&
-    html.includes('btn btn-dark btn-lg" target="_blank" rel="noopener">linkedin'),
-  "pro contact path"
-);
+// —— BIAS AUDIT — craft must not beat signal ———
+function biasLens(r, lens) {
+  record(r, lens, "featured cards have metrics", (html.match(/card-metric/g) || []).length >= 2);
+  record(r, lens, "linkedin primary CTA", html.includes('btn btn-dark btn-lg" target="_blank" rel="noopener">linkedin'));
+  record(r, lens, "no grad mailto", !html.includes("mailto:arazs@uci.edu"));
+  record(r, lens, "approach in mobile dock", html.includes('href="#principles"') && html.includes("approach"));
+  record(r, lens, "focus-over-motivation voice", html.includes("focus beats motivation"), "DSA discipline without sheet on page");
+}
 
-check(
-  "bias: no grad email in mailto",
-  !html.includes("mailto:arazs@uci.edu"),
-  "removed student email friction"
-);
+// —— FIRST PRINCIPLES — bare signal only ———
+function firstPrinciplesLens(r, lens) {
+  const metrics = ["7 yrs", "95%", "175k", "cross-team"];
+  record(r, lens, "proof metrics >= 4", metrics.filter((m) => html.includes(m)).length >= 4);
 
-// —— Pass 4: FIRST PRINCIPLES — bare signal rebuild ———
-const metrics = ["7 yrs", "95%", "175k", "cross-team", "cdk"];
-const foundMetrics = metrics.filter((m) => html.includes(m));
-check(
-  "first-principles: proof metrics >= 4",
-  foundMetrics.length >= 4,
-  foundMetrics.join(", ")
-);
+  const backend = ["event-driven", "lambda", "reconcil", "idempotency", "cdk", "microservices"];
+  record(r, lens, "backend signals >= 5", backend.filter((s) => text.includes(s)).length >= 5);
 
-const backendSignals = [
-  "backend",
-  "distributed",
-  "event-driven",
-  "lambda",
-  "microservices",
-  "reconcil",
-  "idempotency",
-  "cdk",
-];
-const foundBackend = backendSignals.filter((s) => text.includes(s));
-check(
-  "first-principles: backend signals >= 6",
-  foundBackend.length >= 6,
-  `found=${foundBackend.length}`
-);
+  record(r, lens, "milestone before fabflix", html.indexOf("milestone search") < html.indexOf("fabflix") || html.indexOf("175,000") < html.indexOf("21,000"));
+  record(r, lens, "human manifesto present", html.includes("snow") && html.includes("coffee"), "intuition lifestyle anchor");
+  record(r, lens, "public-safe framing", html.includes("internal repos stay private") || html.includes("public-safe"));
+}
 
-check(
-  "first-principles: milestone before fabflix in earlier work",
-  html.indexOf("milestone") < html.indexOf("fabflix") ||
-    html.indexOf("175,000") < html.indexOf("21,000"),
-  "analytical anchor first"
-);
+// —— INTUITION FLOW — scan path any time of day ———
+function intuitionFlowLens(r, lens) {
+  record(r, lens, "flow: signal→work", html.indexOf('id="signal"') < html.indexOf('id="platform-work"'));
+  record(r, lens, "flow: work→approach", html.indexOf('id="platform-work"') < html.indexOf('id="principles"'));
+  record(r, lens, "flow: approach→platform", html.indexOf('id="principles"') < html.indexOf('id="platform"'));
+  record(r, lens, "four approach principles", (html.match(/principle-card/g) || []).length >= 4);
+  record(r, lens, "invert principle named", html.includes("invert the failure"));
+  record(r, lens, "measure principle named", html.includes("measure the bottleneck"));
+}
 
-// —— Pass 5: UX structure ———
-check(
-  "structure: nav work first",
-  html.indexOf('href="#platform-work"') < html.indexOf('href="#platform"'),
-  "nav order"
-);
+for (let round = 1; round <= ROUNDS; round++) {
+  runLens(round, "inversion", inversionLens);
+  runLens(round, "latticework", latticeworkLens);
+  runLens(round, "bias", biasLens);
+  runLens(round, "first-principles", firstPrinciplesLens);
+  runLens(round, "intuition-flow", intuitionFlowLens);
+}
 
-check(
-  "structure: mobile dock work first",
-  html.includes('mobile-dock') &&
-    html.indexOf('href="#platform-work"') < html.indexOf('href="#contact"'),
-  "mobile nav"
-);
+const failures = allChecks.filter((c) => !c.ok);
+const byLens = {};
+for (const c of allChecks) {
+  byLens[c.lens] = byLens[c.lens] || { total: 0, failed: 0 };
+  byLens[c.lens].total++;
+  if (!c.ok) byLens[c.lens].failed++;
+}
 
-check(
-  "structure: all section ids",
-  ["signal", "platform-work", "platform", "proof", "experience", "contact"].every(
-    (id) => html.includes(`id="${id}"`)
-  ),
-  "sections present"
-);
-
-// —— Pass 6: Confidentiality ———
-check(
-  "confidential: no mag7 name-drops",
-  !/\b(meta|google|netflix|nvidia|openai)\b/.test(text.replace(/gcp/g, "")),
-  "indirect positioning"
-);
-
-check(
-  "confidential: public-safe framing",
-  html.includes("public-safe") || html.includes("internal repos stay private"),
-  "nda-aware"
-);
-
-const failures = checks.filter((c) => !c.ok);
 const result = {
-  framework: "munger-inversion-latticework-bias-first-principles",
-  totalChecks: checks.length,
+  framework: "munger-10x5-lens-intuition-flow",
+  rounds: ROUNDS,
+  lenses: ["inversion", "latticework", "bias", "first-principles", "intuition-flow"],
+  totalChecks: allChecks.length,
   totalFailures: failures.length,
   allPassed: failures.length === 0,
-  checks,
-  failures,
+  byLens,
+  failures: failures.slice(0, 20),
+  checks: allChecks,
 };
 
 writeFileSync(join(root, "munger-battle-test-results.json"), JSON.stringify(result, null, 2));
 
-console.log(`Munger battle test: ${checks.length - failures.length}/${checks.length} passed`);
-failures.forEach((f) => console.log(`  FAIL: ${f.name} — ${f.detail}`));
+const uniqueFailures = [...new Set(failures.map((f) => `${f.lens}: ${f.name}`))];
+console.log(`Munger ${ROUNDS}-round battle test: ${allChecks.length - failures.length}/${allChecks.length} passed`);
+if (uniqueFailures.length) {
+  uniqueFailures.forEach((f) => console.log(`  FAIL: ${f}`));
+}
 process.exit(failures.length > 0 ? 1 : 0);

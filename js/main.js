@@ -10,10 +10,10 @@
   var sectionIds = [
     "signal",
     "platform-work",
+    "principles",
     "platform",
     "proof",
     "experience",
-    "principles",
     "skills",
     "earlier-work",
     "contact",

@@ -46,6 +46,32 @@
 </head>
 <body class="site">
 
+	<header id="signal" class="signal-strip signal-strip--global reveal" aria-label="Proof at a glance">
+		<div class="signal-inner">
+			<div class="signal-grid">
+				<div class="signal-item">
+					<span class="signal-value">7 yrs</span>
+					<span class="signal-label">Production backends</span>
+				</div>
+				<div class="signal-item">
+					<span class="signal-value">95%</span>
+					<span class="signal-label">Latency cut · Ford GCP</span>
+				</div>
+				<div class="signal-item">
+					<span class="signal-value">Cross-team</span>
+					<span class="signal-label">CDK &amp; safe deploy</span>
+				</div>
+				<div class="signal-item">
+					<span class="signal-value">175k+</span>
+					<span class="signal-label">URLs ranked · Milestone</span>
+				</div>
+			</div>
+			<p class="signal-hook">Platform engineer — event-driven services, governed releases, reconciliation under load. Invert failure first, measure what moved. Cloud billing and infra platform roles welcome.</p>
+		</div>
+	</header>
+
+	<div class="site-frame">
+
 <aside id="sidebar" class="sidebar d-flex p-4">
 	<div class="main-info w-100">
 		<span class="eyebrow">Platform · Events · Reconciliation</span>
@@ -85,28 +111,6 @@
 </aside>
 
 <main class="main-content active">
-
-	<section id="signal" class="signal-strip reveal" aria-label="Proof at a glance">
-		<div class="signal-grid">
-			<div class="signal-item">
-				<span class="signal-value">7 yrs</span>
-				<span class="signal-label">Production backends</span>
-			</div>
-			<div class="signal-item">
-				<span class="signal-value">95%</span>
-				<span class="signal-label">Latency cut · Ford GCP</span>
-			</div>
-			<div class="signal-item">
-				<span class="signal-value">Cross-team</span>
-				<span class="signal-label">CDK &amp; safe deploy</span>
-			</div>
-			<div class="signal-item">
-				<span class="signal-value">175k+</span>
-				<span class="signal-label">URLs ranked · Milestone</span>
-			</div>
-		</div>
-		<p class="signal-hook">Platform engineer — event-driven services, governed releases, reconciliation under load. Cloud billing and infra platform roles welcome.</p>
-	</section>
 
 	<section id="platform-work" class="platform-work reveal">
 		<span class="section-kicker">Selected work</span>
@@ -175,6 +179,26 @@
 						<span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Design systems</span>
 					</div>
 				</article>
+			</div>
+		</div>
+	</section>
+
+	<section id="principles" class="principles reveal">
+		<span class="section-kicker">Approach</span>
+		<h2 class="section-title">How I think before I ship</h2>
+		<p class="section-copy">Same discipline at 7am or midnight — invert what breaks, name the real bottleneck, verify the number moved, then ship what survives contact with reality.</p>
+		<div class="row">
+			<div class="col-md-6 col-lg-3 mb-4">
+				<article class="principle-card"><div class="num">01</div><h3>Correctness first</h3><p>Before throughput — what happens on retry, duplicate event, or partial failure? Systems that bill, bind, or reconcile cannot afford silent drift.</p></article>
+			</div>
+			<div class="col-md-6 col-lg-3 mb-4">
+				<article class="principle-card"><div class="num">02</div><h3>Measure the bottleneck</h3><p>Focus beats motivation when the constraint is clear — latency in a transform path, deploy friction slowing teams, a gap in observability. Name it, cut it, confirm it moved.</p></article>
+			</div>
+			<div class="col-md-6 col-lg-3 mb-4">
+				<article class="principle-card"><div class="num">03</div><h3>Invert the failure</h3><p>What would make this fragile at 10× traffic, a bad deploy, or a confused downstream owner — then design so that version does not happen.</p></article>
+			</div>
+			<div class="col-md-6 col-lg-3 mb-4">
+				<article class="principle-card"><div class="num">04</div><h3>Own the whole path</h3><p>From event intake to member outcome — depth over surface area. Clear in review, steady in incident, honest about the next increment.</p></article>
 			</div>
 		</div>
 	</section>
@@ -373,26 +397,6 @@
 		</div>
 	</section>
 
-	<section id="principles" class="principles reveal">
-		<span class="section-kicker">Approach</span>
-		<h2 class="section-title">How I think before I ship</h2>
-		<p class="section-copy">Invert the failure modes first — then build toward what survives contact with reality.</p>
-		<div class="row">
-			<div class="col-md-6 col-lg-3 mb-4">
-				<article class="principle-card"><div class="num">01</div><h3>Correctness first</h3><p>Before throughput — what happens on retry, duplicate event, or partial failure? Systems that bill, bind, or reconcile cannot afford silent drift.</p></article>
-			</div>
-			<div class="col-md-6 col-lg-3 mb-4">
-				<article class="principle-card"><div class="num">02</div><h3>Measure the bottleneck</h3><p>Latency in transformation paths, deploy friction slowing teams, observability gaps masking incidents — name it, cut it, verify the number moved.</p></article>
-			</div>
-			<div class="col-md-6 col-lg-3 mb-4">
-				<article class="principle-card"><div class="num">03</div><h3>Invert the failure</h3><p>What would make this fragile at 10× traffic, a bad deploy, or a confused downstream owner — then design so that version does not happen.</p></article>
-			</div>
-			<div class="col-md-6 col-lg-3 mb-4">
-				<article class="principle-card"><div class="num">04</div><h3>Own the whole path</h3><p>From event intake to member outcome — depth over surface area. Clear in review, steady in incident, honest about the next increment.</p></article>
-			</div>
-		</div>
-	</section>
-
 	<section id="skills" class="skills-panel reveal">
 		<span class="section-kicker">Stack</span>
 		<h2 class="section-title">Tools I reach for</h2>
@@ -471,11 +475,13 @@
 
 </main>
 
+	</div><!-- .site-frame -->
+
 <nav class="mobile-dock" aria-label="Mobile section navigation">
 	<div class="mobile-dock-inner">
 		<a href="#platform-work"><i class="fas fa-layer-group"></i>Work</a>
+		<a href="#principles"><i class="fas fa-compass"></i>Approach</a>
 		<a href="#platform"><i class="fas fa-sitemap"></i>Platform</a>
-		<a href="#proof"><i class="fas fa-link"></i>Links</a>
 		<a href="#experience"><i class="fas fa-briefcase"></i>Career</a>
 		<a href="#contact"><i class="fas fa-envelope"></i>Contact</a>
 	</div>
