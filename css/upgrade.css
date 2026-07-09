@@ -838,7 +838,7 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
     padding-bottom: var(--mobile-dock-space);
   }
   body.site section.contact-panel {
-    padding-bottom: calc(var(--section-pad-y) + var(--mobile-dock-space));
+    padding-bottom: calc(var(--section-pad-y) + var(--mobile-dock-space) + 1.5rem);
   }
   .blueprint-flow { grid-template-columns: repeat(3, 1fr); }
   .deploy-pipeline { grid-template-columns: 1fr 1fr; }

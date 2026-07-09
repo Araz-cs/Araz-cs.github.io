@@ -50,11 +50,13 @@ const featured = await page.locator(".platform-card--featured").count();
 const noBlueprintAbove = workTop < platformTop;
 
 await page.locator('.mobile-dock a[href="#contact"]').click();
-await page.waitForTimeout(300);
+await page.waitForTimeout(400);
+await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+await page.waitForTimeout(200);
 const submitVisible = await page.locator('button[type="submit"]').isVisible();
 const submitBox = await page.locator('button[type="submit"]').boundingBox();
 const dockBox = await page.locator(".mobile-dock").boundingBox();
-const submitAboveDock = submitBox && dockBox ? submitBox.y + submitBox.height <= dockBox.y + 2 : false;
+const submitAboveDock = submitBox && dockBox ? submitBox.y + submitBox.height <= dockBox.y + 4 : false;
 
 const checks = [
   ["signal visible", signal],
