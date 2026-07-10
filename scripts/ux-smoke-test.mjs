@@ -33,11 +33,20 @@ const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
 await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: "networkidle" });
 
 const signal = await page.locator("#signal .signal-value").first().isVisible();
-const signalFirst = await page.evaluate(() => {
+const personFirst = await page.evaluate(() => {
+  const sidebar = document.getElementById("sidebar");
   const signal = document.getElementById("signal");
   const work = document.getElementById("platform-work");
-  if (!signal || !work) return false;
-  return signal.getBoundingClientRect().top < work.getBoundingClientRect().top;
+  if (!sidebar || !signal || !work) return false;
+  const st = sidebar.getBoundingClientRect().top;
+  const sg = signal.getBoundingClientRect().top;
+  const wt = work.getBoundingClientRect().top;
+  return st < sg && sg < wt;
+});
+const bioVisible = await page.evaluate(() => {
+  const lead = document.querySelector(".sidebar .lead");
+  const manifesto = document.querySelector(".sidebar .manifesto");
+  return !!(lead && manifesto && getComputedStyle(lead).display !== "none" && getComputedStyle(manifesto).display !== "none");
 });
 const principlesBeforePlatform = await page.evaluate(() => {
   const p = document.getElementById("principles");
@@ -61,7 +70,8 @@ const submitAboveDock = submitBox && dockBox ? submitBox.y + submitBox.height <=
 
 const checks = [
   ["signal visible", signal],
-  ["signal before work on mobile", signalFirst],
+  ["person first: sidebar → signal → work", personFirst],
+  ["full bio visible on mobile", bioVisible],
   ["mobile work visible", workTitle],
   ["approach before platform", principlesBeforePlatform],
   ["work before platform", noBlueprintAbove],

@@ -66,10 +66,27 @@ for (const vp of viewports) {
   console.log(`\n=== ${vp.name} TOP ===`);
   console.log(JSON.stringify(top, null, 2));
 
-  if (top.firstVisible !== "signal") issues.push(`${vp.name}: first visible is ${top.firstVisible}, not signal`);
+  if (top.firstVisible !== "sidebar") issues.push(`${vp.name}: first visible is ${top.firstVisible}, not sidebar`);
   if (top.hScroll) issues.push(`${vp.name}: horizontal scroll`);
   if (top.signalOpacity === "0") issues.push(`${vp.name}: signal hidden (opacity 0)`);
   if (top.workOpacity === "0") issues.push(`${vp.name}: work section hidden at load`);
+
+  const bio = await page.evaluate(() => {
+    const lead = document.querySelector(".sidebar .lead");
+    const manifesto = document.querySelector(".sidebar .manifesto");
+    const hook = document.querySelector(".signal-hook");
+    const photo = document.querySelector(".sidebar img.rounded-circle");
+    return {
+      leadVisible: lead && getComputedStyle(lead).display !== "none",
+      manifestoVisible: manifesto && getComputedStyle(manifesto).display !== "none",
+      hookVisible: hook && getComputedStyle(hook).display !== "none",
+      photoH: photo?.getBoundingClientRect().height || 0,
+    };
+  });
+  if (!bio.leadVisible) issues.push(`${vp.name}: bio lead hidden`);
+  if (!bio.manifestoVisible) issues.push(`${vp.name}: manifesto hidden`);
+  if (!bio.hookVisible) issues.push(`${vp.name}: signal hook hidden`);
+  if (bio.photoH < 90) issues.push(`${vp.name}: profile photo too small`);
 
   // scroll to bottom
   await page.evaluate(() => window.scrollTo({ top: 99999, behavior: "instant" }));

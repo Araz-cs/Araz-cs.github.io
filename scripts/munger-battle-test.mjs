@@ -27,10 +27,10 @@ function inversionLens(r, lens) {
   const signalIdx = html.indexOf('id="signal"');
   const sidebarIdx = html.indexOf('id="sidebar"');
   const mainIdx = html.indexOf("<main");
-  record(r, lens, "signal before sidebar in DOM", signalIdx >= 0 && signalIdx < sidebarIdx);
+  record(r, lens, "sidebar before signal in DOM", sidebarIdx >= 0 && sidebarIdx < signalIdx);
   record(r, lens, "signal before main in DOM", signalIdx >= 0 && signalIdx < mainIdx);
-  record(r, lens, "mobile signal hook hidden", /\.signal-hook\s*\{[^}]*display:\s*none/.test(rawCss));
-  record(r, lens, "mobile compact sidebar visible", rawCss.includes("display: block !important") && rawCss.includes(".sidebar .lead"));
+  record(r, lens, "mobile keeps full bio", !/\.sidebar \.lead[\s\S]{0,80}display:\s*none/.test(rawCss));
+  record(r, lens, "mobile keeps signal hook", !/\.signal-hook\s*\{[^}]*display:\s*none/.test(rawCss));
 
   const workIdx = html.indexOf('id="platform-work"');
   const platformIdx = html.indexOf('id="platform"');

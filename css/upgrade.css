@@ -786,89 +786,110 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
   html { scroll-behavior: auto; }
   :root { --section-pad-x: 1.5rem; --section-pad-y: 2.75rem; }
 
+  /* Proof strip — readable, not a stub */
   section.signal-strip {
-    padding: 0.5rem var(--section-pad-x);
-  }
-
-  .signal-hook {
-    display: none;
+    padding: 0.85rem var(--section-pad-x) 0.8rem;
   }
 
   .signal-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0.35rem;
-    margin-bottom: 0;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 0.65rem;
   }
 
   .signal-item {
-    padding: 0.4rem 0.2rem;
-    border-radius: 8px;
+    padding: 0.6rem 0.5rem;
+    border-radius: 12px;
   }
 
   .signal-value {
-    font-size: 0.72rem;
+    font-size: 1.05rem;
   }
 
   .signal-label {
-    font-size: 0.48rem;
-    letter-spacing: 0.04em;
-    margin-top: 0.1rem;
-    line-height: 1.2;
+    font-size: 0.62rem;
   }
 
-  /* Compact mobile sidebar — identity + CTAs; nav lives in dock */
+  .signal-hook {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+
+  /* Full mobile identity — original voice restored; dock replaces site-nav only */
   body.site .sidebar {
     display: block !important;
     position: static;
     width: 100%;
     height: auto;
-    padding: 0.75rem var(--section-pad-x) 0.85rem !important;
+    padding: 1.75rem var(--section-pad-x) 1.5rem !important;
     overflow: visible;
   }
 
-  .sidebar .eyebrow,
-  .sidebar .lead,
-  .sidebar .manifesto,
-  .sidebar .site-nav,
-  .sidebar .sidebar-metrics,
-  .sidebar .social {
+  .sidebar .main-info {
+    display: block;
+  }
+
+  .sidebar .site-nav {
     display: none !important;
   }
 
-  .sidebar .main-info {
+  /* Proof lives in the signal strip on mobile — avoid duplicate metric chips */
+  .sidebar .sidebar-metrics {
+    display: none !important;
+  }
+
+  .sidebar .eyebrow {
+    display: inline-block;
+  }
+
+  .sidebar .lead,
+  .sidebar .manifesto {
+    display: block;
+  }
+
+  .sidebar .social {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem 0.65rem;
   }
 
   .sidebar img.rounded-circle {
-    width: 44px !important;
-    height: 44px !important;
-    margin-bottom: 0 !important;
-    flex-shrink: 0;
+    width: 112px;
+    height: 112px;
+    margin-bottom: 0.85rem !important;
   }
 
   .sidebar .heading {
-    font-size: 1rem;
-    margin: 0;
-    flex: 1 1 120px;
-    line-height: 1.15;
+    font-size: 1.85rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .sidebar .lead {
+    font-size: 0.94rem;
+    line-height: 1.65;
+    margin-bottom: 0.85rem;
+  }
+
+  .sidebar .manifesto {
+    font-size: 0.86rem;
+    line-height: 1.6;
+    margin-bottom: 1.1rem;
   }
 
   .sidebar .btn-row {
     display: flex;
-    gap: 0.35rem;
-    width: 100%;
-    margin: 0;
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
   .sidebar .btn-row .btn-lg {
-    flex: 1;
-    width: auto !important;
-    font-size: 0.72rem !important;
-    padding: 0.4rem 0.5rem !important;
+    flex: 1 1 auto;
+    min-width: 7.5rem;
     text-align: center;
+    font-size: 0.88rem !important;
+    padding: 0.55rem 1rem !important;
   }
 
   body.site .main-content {
@@ -893,13 +914,16 @@ body.site #timeline a { color: var(--teal); font-weight: 600; font-size: 0.92rem
 
 @media (max-width: 640px) {
   :root { --section-pad-x: 1.15rem; --section-pad-y: 2.75rem; }
-  .signal-grid { gap: 0.3rem; }
-  .signal-value { font-size: 0.68rem; }
-  .signal-label { font-size: 0.45rem; }
-  body.site .sidebar { padding: 0.65rem var(--section-pad-x) 0.75rem !important; }
-  .sidebar img.rounded-circle { width: 40px !important; height: 40px !important; }
-  .sidebar .heading { font-size: 0.95rem; }
-  .sidebar .btn-row .btn-lg { font-size: 0.68rem !important; padding: 0.38rem 0.45rem !important; }
+  .signal-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .signal-value { font-size: 1rem; }
+  .signal-label { font-size: 0.62rem; }
+  .signal-hook { font-size: 0.84rem; }
+  .sidebar-metrics { gap: 0.35rem; }
+  body.site .sidebar { padding: 1.5rem 1.15rem 1.35rem !important; }
+  .sidebar img.rounded-circle { width: 108px; height: 108px; }
+  .sidebar .heading { font-size: 1.75rem; }
+  .sidebar .lead, .sidebar .manifesto { font-size: 0.86rem; }
+  .sidebar .btn-row .btn-lg { width: 100%; text-align: center; }
   .section-title { font-size: 1.45rem; }
   .section-copy { font-size: 0.94rem; }
   .blueprint-flow { grid-template-columns: 1fr 1fr; gap: 0.55rem; }
