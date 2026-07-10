@@ -48,11 +48,11 @@ function inversionLens(r, lens) {
 
 function latticeworkLens(r, lens) {
   const heroLead = html.match(/class="lead"[^>]*>([^<]+)/)?.[1] || "";
-  record(r, lens, "hero platform ownership", /platform layer|platform engineer/.test(heroLead));
+  record(r, lens, "hero platform ownership", /platform layer|platform engineer|own the platform/.test(heroLead));
 
   const signalHook = html.match(/class="signal-hook"[^>]*>([^<]+)/)?.[1] || "";
   record(r, lens, "billing platform signal", /billing|reconcil|usage/.test(signalHook));
-  record(r, lens, "decision model in strip", /invert|decide/.test(signalHook));
+  record(r, lens, "decision model in strip", /invert|decide|judgment/.test(signalHook));
 
   const workBlock = html.slice(html.indexOf('id="platform-work"'), html.indexOf('id="principles"'));
   record(r, lens, "usage-adjacent in top 2", workBlock.indexOf("usage-adjacent") >= 0 || workBlock.indexOf("transaction-critical") >= 0);
@@ -78,7 +78,7 @@ function firstPrinciplesLens(r, lens) {
 
   record(r, lens, "milestone before fabflix", html.indexOf("milestone") < html.indexOf("fabflix"));
   record(r, lens, "human manifesto", html.includes("snow") && html.includes("coffee"));
-  record(r, lens, "how i act voice", html.includes("how i act"));
+  record(r, lens, "how i decide voice", html.includes("how i decide"));
 }
 
 function intuitionFlowLens(r, lens) {
@@ -97,6 +97,8 @@ function principalBarLens(r, lens) {
   record(r, lens, "downstream owner thinking", html.includes("downstream"));
   record(r, lens, "platform primitives chip", html.includes("platform primitives"));
   record(r, lens, "decide before ship title", html.includes("how i decide before i ship"));
+  record(r, lens, "leverage / constraints voice", html.includes("leverage") || html.includes("constraints other"));
+  record(r, lens, "intellectual honesty signal", html.includes("intellectual honesty") || html.includes("survive cross-check") || html.includes("survive cross"));
 }
 
 for (let round = 1; round <= ROUNDS; round++) {
