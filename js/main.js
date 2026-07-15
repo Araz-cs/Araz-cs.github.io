@@ -11,11 +11,11 @@
     "signal",
     "platform-work",
     "principles",
-    "platform",
     "experience",
     "proof",
     "skills",
     "earlier-work",
+    "blueprint",
     "contact",
   ];
 

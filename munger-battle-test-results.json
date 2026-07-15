@@ -9,12 +9,12 @@
     "intuition-flow",
     "principal-bar"
   ],
-  "totalChecks": 350,
+  "totalChecks": 420,
   "totalFailures": 0,
   "allPassed": true,
   "byLens": {
     "inversion": {
-      "total": 70,
+      "total": 110,
       "failed": 0
     },
     "latticework": {
@@ -22,7 +22,7 @@
       "failed": 0
     },
     "bias": {
-      "total": 60,
+      "total": 70,
       "failed": 0
     },
     "first-principles": {
@@ -34,7 +34,7 @@
       "failed": 0
     },
     "principal-bar": {
-      "total": 60,
+      "total": 80,
       "failed": 0
     }
   },

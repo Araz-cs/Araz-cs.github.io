@@ -61,7 +61,7 @@ for (const cfg of configs) {
   if (top.signalPct > 55) issues.push(`${cfg.name}: signal alone eats ${top.signalPct}% of viewport`);
   if (top.hScroll) issues.push(`${cfg.name}: horizontal scroll`);
 
-  for (const href of ["#platform-work", "#principles", "#platform", "#experience", "#contact"]) {
+  for (const href of ["#platform-work", "#principles", "#experience", "#blueprint", "#contact"]) {
     await page.goto(URL, { waitUntil: "networkidle" });
     await page.locator(`.mobile-dock a[href="${href}"]`).tap();
     await page.waitForTimeout(350);
