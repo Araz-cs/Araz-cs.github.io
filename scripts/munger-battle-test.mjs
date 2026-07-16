@@ -33,16 +33,18 @@ function inversionLens(r, lens) {
   record(r, lens, "mobile keeps signal hook", !/\.signal-hook\s*\{[^}]*display:\s*none/.test(rawCss));
 
   const workIdx = html.indexOf('id="platform-work"');
-  const platformIdx = html.indexOf('id="platform"');
+  const blueprintIdx = html.indexOf('id="blueprint"');
   const principlesIdx = html.indexOf('id="principles"');
   const expIdx = html.indexOf('id="experience"');
   const proofIdx = html.indexOf('id="proof"');
+  const contactIdx = html.indexOf('id="contact"');
 
-  record(r, lens, "work before platform", workIdx < platformIdx);
-  record(r, lens, "approach before platform", principlesIdx < platformIdx);
+  record(r, lens, "work before blueprint", workIdx < blueprintIdx);
+  record(r, lens, "approach before blueprint", principlesIdx < blueprintIdx);
+  record(r, lens, "blueprint before contact", blueprintIdx < contactIdx);
   record(r, lens, "experience before corroboration", expIdx < proofIdx);
   record(r, lens, "no see-blueprint-above", !html.includes("see blueprint above"));
-  record(r, lens, "depth behind disclosure", html.includes("platform-expand"));
+  record(r, lens, "blueprint deploy pipeline visible", html.includes("deploy-pipeline"));
   record(r, lens, "product card deprioritized", html.includes("platform-card--secondary"));
 }
 
@@ -66,7 +68,8 @@ function biasLens(r, lens) {
   record(r, lens, "no grad mailto", !html.includes("mailto:arazs@uci.edu"));
   record(r, lens, "approach in mobile dock", html.includes('href="#principles"'));
   record(r, lens, "contact asks what breaks", html.includes("what breaks if it goes wrong"));
-  record(r, lens, "nav approach before platform", html.indexOf('href="#principles"') < html.indexOf('href="#platform"'));
+  record(r, lens, "nav approach before blueprint", html.indexOf('href="#principles"') < html.indexOf('href="#blueprint"'));
+  record(r, lens, "blueprint in mobile dock", html.includes('href="#blueprint"'));
 }
 
 function firstPrinciplesLens(r, lens) {
@@ -84,8 +87,8 @@ function firstPrinciplesLens(r, lens) {
 function intuitionFlowLens(r, lens) {
   record(r, lens, "flow signal→work", html.indexOf('id="signal"') < html.indexOf('id="platform-work"'));
   record(r, lens, "flow work→approach", html.indexOf('id="platform-work"') < html.indexOf('id="principles"'));
-  record(r, lens, "flow approach→platform", html.indexOf('id="principles"') < html.indexOf('id="platform"'));
-  record(r, lens, "flow platform→experience", html.indexOf('id="platform"') < html.indexOf('id="experience"'));
+  record(r, lens, "flow approach→experience", html.indexOf('id="principles"') < html.indexOf('id="experience"'));
+  record(r, lens, "flow ends blueprint→contact", html.indexOf('id="blueprint"') < html.indexOf('id="contact"'));
   record(r, lens, "invert principle", html.includes("invert the failure"));
   record(r, lens, "measure principle", html.includes("measure the bottleneck"));
 }
