@@ -4,7 +4,7 @@
  * Munger inversion: if a pill isn't in the paragraph or resume stack, it fails.
  */
 
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -100,11 +100,8 @@ checks.push({ area: "nav", name: "munger featured metrics >= 2", ok: (html.match
 checks.push({ area: "nav", name: "section order skills before proof", ok: html.indexOf('id="skills"') < html.indexOf('id="proof"') });
 checks.push({ area: "resume", name: "pdf download in sidebar", ok: html.includes('download="araz_sultanian_resume.pdf"') });
 checks.push({ area: "resume", name: "pdf download in proof", ok: html.includes('proof-link--download') });
-checks.push({ area: "resume", name: "view online secondary link", ok: html.includes("view resume online") });
-
-const resumeHtml = readFileSync(join(root, "docs/resume/Araz_Sultanian_2026.html"), "utf8").toLowerCase();
-checks.push({ area: "resume-html", name: "no print/save-as-pdf button", ok: !resumeHtml.includes("print / save as pdf") && !resumeHtml.includes("window.print()") });
-checks.push({ area: "resume-html", name: "no self-serve download on resume page", ok: !resumeHtml.includes('download="araz_sultanian_resume.pdf"') });
+checks.push({ area: "resume", name: "no html resume links", ok: !html.includes("araz_sultanian_2026.html") && !html.includes("view resume online") });
+checks.push({ area: "resume", name: "pdf file exists", ok: existsSync(join(root, "docs/resume/Araz_Sultanian_Resume.pdf")) });
 checks.push({ area: "site", name: "no resume-meta stack copy", ok: !html.includes("resume-aligned") && !html.includes("icon wall") });
 checks.push({ area: "site", name: "no stack meta copy", ok: !html.includes("logo grid") && !html.includes("grouped by the problems") && !html.includes("same tools behind") });
 const prose = raw.replace(/<script[\s\S]*?<\/script>/gi, "").replace(/<[^>]+>/g, " ");

@@ -117,7 +117,8 @@ function principalBarLens(r, lens) {
   record(r, lens, "ownership I-voice", (html.match(/\bi (co-architected|owned|led|built|migrated|drove|founded|embedded|cut|introduced|refused)/g) || []).length >= 6);
   record(r, lens, "no api inventory obsession", !html.includes("12 lambda apis") && !html.includes("12 apis"));
   record(r, lens, "simple page title", html.includes("<title>araz sultanian 2026</title>"));
-  record(r, lens, "resume 2026 path", html.includes("/docs/resume/araz_sultanian_2026.html"));
+  record(r, lens, "resume pdf path", html.includes("/docs/resume/araz_sultanian_resume.pdf"));
+  record(r, lens, "no html resume links", !html.includes("araz_sultanian_2026.html"));
 }
 
 for (let round = 1; round <= ROUNDS; round++) {

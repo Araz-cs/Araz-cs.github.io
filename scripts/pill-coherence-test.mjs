@@ -138,8 +138,8 @@ checks.push({
 
 checks.push({
   card: "page",
-  name: "resume path Araz_Sultanian_2026",
-  ok: html.includes("/docs/resume/araz_sultanian_2026.html"),
+  name: "resume pdf path",
+  ok: html.includes("/docs/resume/araz_sultanian_resume.pdf"),
 });
 
 checks.push({
