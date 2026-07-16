@@ -36,9 +36,6 @@
     border-color: #111;
     font-weight: 700;
   }
-  @media print {
-    .resume-toolbar { display: none !important; }
-  }
   @page { size: letter; margin: 0.45in 0.55in; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -62,6 +59,10 @@
   .bullet { font-size: 10.5pt; margin-left: 12pt; text-indent: -12pt; margin-bottom: 2pt; }
   .project-header { font-size: 10.5pt; margin-top: 3pt; display: flex; justify-content: space-between; }
   .project-desc { font-size: 10.5pt; margin-bottom: 1pt; }
+  @media print {
+    .resume-toolbar { display: none !important; }
+    body { padding: 0; max-width: none; }
+  }
 </style>
 </head>
 <body>
