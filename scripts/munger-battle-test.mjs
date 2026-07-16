@@ -29,7 +29,7 @@ function inversionLens(r, lens) {
   const mainIdx = html.indexOf("<main");
   record(r, lens, "sidebar before signal in DOM", sidebarIdx >= 0 && sidebarIdx < signalIdx);
   record(r, lens, "signal before main in DOM", signalIdx >= 0 && signalIdx < mainIdx);
-  record(r, lens, "mobile keeps full bio", !/\.sidebar \.lead[\s\S]{0,80}display:\s*none/.test(rawCss));
+  record(r, lens, "mobile keeps full bio", !/\.sidebar \.lead-full[\s\S]{0,80}display:\s*none/.test(rawCss) || /max-width:\s*992px[\s\S]*\.sidebar \.lead-full[\s\S]*display:\s*block/.test(rawCss));
   record(r, lens, "mobile keeps signal hook", !/\.signal-hook\s*\{[^}]*display:\s*none/.test(rawCss));
 
   const workIdx = html.indexOf('id="platform-work"');
@@ -50,11 +50,12 @@ function inversionLens(r, lens) {
   record(r, lens, "no stack meta copy", !html.includes("logo grid") && !html.includes("grouped by the problems") && !html.includes("same tools behind"));
   record(r, lens, "blueprint deploy pipeline visible", html.includes("deploy-pipeline"));
   record(r, lens, "desktop sidebar scrollable", /min-width:\s*993px\)[\s\S]*body\.site \.sidebar[\s\S]*overflow-y:\s*auto/.test(rawCss));
+  record(r, lens, "desktop compact sidebar", /min-width:\s*993px\)[\s\S]*\.lead-full[\s\S]*display:\s*none/.test(rawCss));
   record(r, lens, "product card deprioritized", html.includes("platform-card--secondary"));
 }
 
 function latticeworkLens(r, lens) {
-  const heroLead = html.match(/class="lead"[^>]*>([^<]+)/)?.[1] || "";
+  const heroLead = html.match(/class="lead[^"]*"[^>]*>([^<]+)/)?.[1] || "";
   record(r, lens, "hero platform ownership", /platform layer|platform engineer|own the platform/.test(heroLead));
 
   const signalHook = html.match(/class="signal-hook"[^>]*>([^<]+)/)?.[1] || "";
@@ -91,6 +92,7 @@ function firstPrinciplesLens(r, lens) {
   record(r, lens, "milestone before fabflix", html.indexOf("milestone") < html.indexOf("fabflix"));
   record(r, lens, "human manifesto", html.includes("snow") && html.includes("coffee"));
   record(r, lens, "how i decide voice", html.includes("how i decide"));
+  record(r, lens, "einstein collective quote", html.includes("labors of other men") && html.includes("albert einstein"));
 }
 
 function intuitionFlowLens(r, lens) {
