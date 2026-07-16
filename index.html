@@ -64,7 +64,8 @@
 			<a href="#platform-work">Work</a>
 			<a href="#principles">Approach</a>
 			<a href="#experience">Experience</a>
-			<a href="#proof">Links</a>
+			<a href="#skills">Stack</a>
+			<a href="#proof">Proof</a>
 			<a href="#blueprint">Blueprint</a>
 			<a href="#contact">Contact</a>
 		</nav>
@@ -119,10 +120,10 @@
 				<article class="platform-card platform-card--featured">
 					<div class="icon-wrap"><i class="fas fa-shield-alt"></i></div>
 					<h3>Governed release other squads inherit</h3>
-					<p><strong>Problem:</strong> product teams shipped through different deploy habits — Friday surprises, regional skew, no shared rollback story.<br><strong>What I did:</strong> co-architected zero-downtime Safe Deploy with DynamoDB deploy windows, dual-region CDK promotion, health gates, and auto-rollback. Wrote the runbooks and failure-mode diagrams so the next on-call does not need me in the room.<br><strong>Outcome:</strong> two product organizations adopted it as default; insurance and travel now promote through the same fail-closed path.</p>
+					<p><strong>Problem:</strong> product teams shipped through different deploy habits — Friday surprises, regional skew, no shared rollback story.<br><strong>What I did:</strong> co-architected zero-downtime Safe Deploy with DynamoDB deploy windows, dual-region AWS CDK promotion, CloudFront routing, and GitHub Actions pipelines — health gates and auto-rollback before any region cut. Wrote runbooks and failure-mode diagrams so the next on-call does not need me in the room.<br><strong>Outcome:</strong> two product organizations adopted it as default; insurance and travel now promote through the same fail-closed path.</p>
 					<p class="card-metric"><strong>Org-wide adoption · zero-downtime default · platform primitives teams inherit</strong></p>
 					<div class="chip-row">
-						<span class="chip">AWS CDK</span><span class="chip">DynamoDB</span><span class="chip">CloudFront</span><span class="chip">CloudFormation</span><span class="chip">GitHub Actions</span>
+						<span class="chip">AWS CDK</span><span class="chip">DynamoDB</span><span class="chip">CloudFront</span><span class="chip">GitHub Actions</span><span class="chip">CloudFormation</span>
 					</div>
 				</article>
 			</div>
@@ -133,7 +134,7 @@
 					<p><strong>Problem:</strong> insurance quote-bind lived on legacy PCF; usage-adjacent state drifted under retry and downstream handoff was opaque.<br><strong>What I did:</strong> led PCF → AWS Lambda migration for core bind endpoints on Node.js and TypeScript — API Gateway, MongoDB factory patterns, GitHub Actions guardrails, Missouri Guidewire expansion — idempotency and audit-friendly transitions by default.<br><strong>Outcome:</strong> bind flows stay correct when retries stack; same muscle as metering and revenue-adjacent pipelines where silent drift is unacceptable.</p>
 					<p class="card-metric"><strong>Reconciliation under load · idempotency · audit-friendly state</strong></p>
 					<div class="chip-row">
-						<span class="chip">TypeScript</span><span class="chip">Node.js</span><span class="chip">AWS Lambda</span><span class="chip">API Gateway</span><span class="chip">AWS CDK</span><span class="chip">MongoDB</span>
+						<span class="chip">TypeScript</span><span class="chip">Node.js</span><span class="chip">AWS Lambda</span><span class="chip">API Gateway</span><span class="chip">MongoDB</span><span class="chip">GitHub Actions</span>
 					</div>
 				</article>
 			</div>
@@ -141,9 +142,9 @@
 				<article class="platform-card">
 					<div class="icon-wrap"><i class="fas fa-bolt"></i></div>
 					<h3>Event intake that fails closed</h3>
-					<p><strong>Problem:</strong> paid-social leads needed real-time CRM handoff without duplicate or poison events polluting Salesforce.<br><strong>What I did:</strong> architected Step Functions workflow with validation, deduplication, and observability — chose async boundaries deliberately after mapping failure modes at spike load.<br><strong>Outcome:</strong> intent reaches CRM in under five seconds at 99.9% availability; spikes surface in metrics before downstream owners absorb them.</p>
+					<p><strong>Problem:</strong> paid-social leads needed real-time CRM handoff without duplicate or poison events polluting Salesforce.<br><strong>What I did:</strong> architected AWS Step Functions and Lambda workflow to Salesforce via Mulesoft — validation, deduplication, and Splunk signals after mapping failure modes at spike load.<br><strong>Outcome:</strong> intent reaches CRM in under five seconds at 99.9% availability; spikes surface in metrics before downstream owners absorb them.</p>
 					<div class="chip-row">
-						<span class="chip">Step Functions</span><span class="chip">AWS Lambda</span><span class="chip">Event-driven</span><span class="chip">Salesforce</span><span class="chip">Mulesoft</span>
+						<span class="chip">Step Functions</span><span class="chip">AWS Lambda</span><span class="chip">Salesforce</span><span class="chip">Mulesoft</span><span class="chip">Splunk</span>
 					</div>
 				</article>
 			</div>
@@ -153,7 +154,7 @@
 					<h3>Real-time orchestration at Ford</h3>
 					<p><strong>Problem:</strong> AV data paths were latency-bound and deploy friction blocked iteration across three services.<br><strong>What I did:</strong> migrated Java microservices to Cloud Run; wired Pub/Sub, gRPC, and WebSocket paths; embedded OAuth/OIDC/JWT and security gates in Tekton before every build.<br><strong>Outcome:</strong> 95% latency cut on transformation, 40% faster deploys — because I measured before each cut and named tradeoffs (cold start vs throughput, sync vs async) in review.</p>
 					<div class="chip-row">
-						<span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">GCP Cloud Run</span><span class="chip">Pub/Sub</span><span class="chip">gRPC</span><span class="chip">Tekton</span>
+						<span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">GCP Cloud Run</span><span class="chip">Pub/Sub</span><span class="chip">gRPC</span><span class="chip">WebSocket</span>
 					</div>
 				</article>
 			</div>
@@ -161,9 +162,9 @@
 				<article class="platform-card">
 					<div class="icon-wrap"><i class="fas fa-calendar-alt"></i></div>
 					<h3>Member scheduling I owned</h3>
-					<p><strong>Problem:</strong> travel appointment booking spanned four channels and could double-book under race without explicit state.<br><strong>What I did:</strong> primary engineer on the booking funnel — state machines, Salesforce/Mulesoft contracts, Playwright regression, Splunk production signals. Drove Safe Deploy for API and web paths so promotion matched the platform story.<br><strong>Outcome:</strong> members book in-branch, virtual, phone, or email-advisor without dropped context across service boundaries.</p>
+					<p><strong>Problem:</strong> travel appointment booking spanned four channels and could double-book under race without explicit state.<br><strong>What I did:</strong> primary engineer on the booking funnel — AWS Lambda and CDK APIs, Salesforce/Mulesoft contracts, Playwright regression, Splunk production signals. Drove Safe Deploy for API and web paths so promotion matched the platform story.<br><strong>Outcome:</strong> members book in-branch, virtual, phone, or email-advisor without dropped context across service boundaries.</p>
 					<div class="chip-row">
-						<span class="chip">TypeScript</span><span class="chip">React</span><span class="chip">Salesforce</span><span class="chip">Mulesoft</span><span class="chip">Playwright</span><span class="chip">Splunk</span>
+						<span class="chip">TypeScript</span><span class="chip">React</span><span class="chip">AWS Lambda</span><span class="chip">Salesforce</span><span class="chip">Mulesoft</span><span class="chip">Playwright</span>
 					</div>
 				</article>
 			</div>
@@ -171,7 +172,7 @@
 				<article class="platform-card platform-card--secondary">
 					<div class="icon-wrap"><i class="fas fa-route"></i></div>
 					<h3>Greenfield surfaces members touch</h3>
-					<p>Founding engineer on embeddable help widget (live chat, offline fallback) and Module Federation travel hub in Enterprise My Account — shipped architecture through production on shared React/MUI contracts, not siloed stacks.</p>
+					<p>Founding engineer on embeddable help widget (live chat, offline fallback) and Module Federation travel hub in Enterprise My Account — Vite, React, and MUI shipped architecture through production on shared contracts, not siloed stacks.</p>
 					<div class="chip-row">
 						<span class="chip">React</span><span class="chip">Module Federation</span><span class="chip">Vite</span><span class="chip">MUI</span>
 					</div>
@@ -499,6 +500,7 @@
 		<a href="#platform-work"><i class="fas fa-layer-group"></i>Work</a>
 		<a href="#principles"><i class="fas fa-compass"></i>Approach</a>
 		<a href="#experience"><i class="fas fa-briefcase"></i>Career</a>
+		<a href="#skills"><i class="fas fa-code"></i>Stack</a>
 		<a href="#blueprint"><i class="fas fa-sitemap"></i>Blueprint</a>
 		<a href="#contact"><i class="fas fa-envelope"></i>Contact</a>
 	</div>

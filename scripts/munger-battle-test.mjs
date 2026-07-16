@@ -71,7 +71,9 @@ function biasLens(r, lens) {
   record(r, lens, "approach in mobile dock", html.includes('href="#principles"'));
   record(r, lens, "contact asks what breaks", html.includes("what breaks if it goes wrong"));
   record(r, lens, "nav approach before blueprint", html.indexOf('href="#principles"') < html.indexOf('href="#blueprint"'));
+  record(r, lens, "nav has stack link", html.includes('href="#skills"'));
   record(r, lens, "blueprint in mobile dock", html.includes('href="#blueprint"'));
+  record(r, lens, "stack in mobile dock", html.includes('href="#skills"'));
 }
 
 function firstPrinciplesLens(r, lens) {
