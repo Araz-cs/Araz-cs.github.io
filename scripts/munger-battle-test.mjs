@@ -46,7 +46,8 @@ function inversionLens(r, lens) {
   record(r, lens, "skills before corroboration", html.indexOf('id="skills"') < proofIdx);
   record(r, lens, "stack before proof links", html.indexOf('id="earlier-work"') < proofIdx);
   record(r, lens, "no resume-meta in stack", !html.includes("resume-aligned") && !html.includes("icon wall") && !html.includes("tools from my 2026 resume"));
-  record(r, lens, "stack judgment voice", html.includes("what ships in production") || html.includes("governed release"));
+  record(r, lens, "stack judgment voice", html.includes("what ships in production"));
+  record(r, lens, "no stack meta copy", !html.includes("logo grid") && !html.includes("grouped by the problems") && !html.includes("same tools behind"));
   record(r, lens, "blueprint deploy pipeline visible", html.includes("deploy-pipeline"));
   record(r, lens, "product card deprioritized", html.includes("platform-card--secondary"));
 }
