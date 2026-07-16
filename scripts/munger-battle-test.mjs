@@ -81,8 +81,9 @@ function biasLens(r, lens) {
 }
 
 function firstPrinciplesLens(r, lens) {
-  const metrics = ["95%", "175k", "cross-team", "since 2021"];
+  const metrics = ["95%", "175k", "7 yr", "since 2021"];
   record(r, lens, "proof metrics >= 4", metrics.filter((m) => html.includes(m)).length >= 4);
+  record(r, lens, "seven years pill", html.includes("7 yrs"));
 
   const billingAdjacent = ["metering", "reconcil", "idempotency", "usage", "invoice", "billing"];
   record(r, lens, "billing-adjacent terms >= 4", billingAdjacent.filter((s) => text.includes(s)).length >= 4);
