@@ -60,6 +60,31 @@ await snap("top", 0);
 await snap("mid", 1200);
 await snap("deep", 3500);
 
+const sidebarAccess = await page.evaluate(() => {
+  const sidebar = document.getElementById("sidebar");
+  const btnRow = document.querySelector(".sidebar .btn-row");
+  if (!sidebar || !btnRow) return { ok: false, reason: "missing nodes" };
+  const overflowY = getComputedStyle(sidebar).overflowY;
+  sidebar.scrollTop = 0;
+  const needsScroll = sidebar.scrollHeight > sidebar.clientHeight + 2;
+  sidebar.scrollTop = sidebar.scrollHeight;
+  const btnBottom = btnRow.getBoundingClientRect().bottom;
+  const sidebarBottom = sidebar.getBoundingClientRect().bottom;
+  return {
+    overflowY,
+    needsScroll,
+    btnReachable: btnBottom <= sidebarBottom + 2,
+  };
+});
+
+console.log("\nSIDEBAR ACCESS:", JSON.stringify(sidebarAccess, null, 2));
+if (!["auto", "scroll", "overlay"].includes(sidebarAccess.overflowY)) {
+  issues.push(`sidebar overflow-y is ${sidebarAccess.overflowY}, expected scrollable`);
+}
+if (sidebarAccess.needsScroll && !sidebarAccess.btnReachable) {
+  issues.push("sidebar buttons not reachable after scroll");
+}
+
 console.log("\nISSUES:", issues.length ? issues.join("\n") : "none");
 await browser.close();
 server.close();

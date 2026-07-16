@@ -49,7 +49,7 @@ function inversionLens(r, lens) {
   record(r, lens, "stack judgment voice", html.includes("what ships in production"));
   record(r, lens, "no stack meta copy", !html.includes("logo grid") && !html.includes("grouped by the problems") && !html.includes("same tools behind"));
   record(r, lens, "blueprint deploy pipeline visible", html.includes("deploy-pipeline"));
-  record(r, lens, "product card deprioritized", html.includes("platform-card--secondary"));
+  record(r, lens, "desktop sidebar scrollable", /min-width:\s*993px\)[\s\S]*body\.site \.sidebar[\s\S]*overflow-y:\s*auto/.test(rawCss));
 }
 
 function latticeworkLens(r, lens) {
