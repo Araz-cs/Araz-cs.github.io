@@ -43,6 +43,8 @@ function inversionLens(r, lens) {
   record(r, lens, "approach before blueprint", principlesIdx < blueprintIdx);
   record(r, lens, "blueprint before contact", blueprintIdx < contactIdx);
   record(r, lens, "experience before corroboration", expIdx < proofIdx);
+  record(r, lens, "skills before corroboration", html.indexOf('id="skills"') < proofIdx);
+  record(r, lens, "stack before proof links", html.indexOf('id="earlier-work"') < proofIdx);
   record(r, lens, "no see-blueprint-above", !html.includes("see blueprint above"));
   record(r, lens, "blueprint deploy pipeline visible", html.includes("deploy-pipeline"));
   record(r, lens, "product card deprioritized", html.includes("platform-card--secondary"));
@@ -104,6 +106,8 @@ function principalBarLens(r, lens) {
   record(r, lens, "intellectual honesty signal", html.includes("intellectual honesty") || html.includes("survive cross-check") || html.includes("survive cross"));
   record(r, lens, "ownership I-voice", (html.match(/\bi (co-architected|owned|led|built|migrated|drove|founded|embedded|cut|introduced|refused)/g) || []).length >= 6);
   record(r, lens, "no api inventory obsession", !html.includes("12 lambda apis") && !html.includes("12 apis"));
+  record(r, lens, "simple page title", html.includes("<title>araz sultanian 2026</title>"));
+  record(r, lens, "resume 2026 path", html.includes("/docs/resume/araz_sultanian_2026.html"));
 }
 
 for (let round = 1; round <= ROUNDS; round++) {

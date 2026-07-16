@@ -12,9 +12,9 @@
     "platform-work",
     "principles",
     "experience",
-    "proof",
     "skills",
     "earlier-work",
+    "proof",
     "blueprint",
     "contact",
   ];
