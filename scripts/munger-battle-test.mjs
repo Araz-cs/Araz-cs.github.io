@@ -60,6 +60,8 @@ function latticeworkLens(r, lens) {
 
   const signalHook = html.match(/class="signal-hook"[^>]*>([^<]+)/)?.[1] || "";
   record(r, lens, "billing platform signal", /billing|reconcil|usage/.test(signalHook));
+  record(r, lens, "signal hook human voice", /the breaks that cost you|usually quiet|month close tells you/.test(signalHook));
+  record(r, lens, "no robotic signal list", !signalHook.includes("cannot silently drift") && !signalHook.includes("correctness compounds"));
   record(r, lens, "decision model in strip", /invert|decide|judgment/.test(signalHook));
 
   const workBlock = html.slice(html.indexOf('id="platform-work"'), html.indexOf('id="principles"'));
