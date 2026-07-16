@@ -102,6 +102,9 @@ checks.push({ area: "resume", name: "pdf download in sidebar", ok: html.includes
 checks.push({ area: "resume", name: "pdf download in proof", ok: html.includes('proof-link--download') });
 checks.push({ area: "resume", name: "no html resume links", ok: !html.includes("araz_sultanian_2026.html") && !html.includes("view resume online") });
 checks.push({ area: "resume", name: "pdf file exists", ok: existsSync(join(root, "docs/resume/Araz_Sultanian_Resume.pdf")) });
+const sidebarBlock = raw.slice(raw.indexOf('id="sidebar"'), raw.indexOf("</aside>")).toLowerCase();
+checks.push({ area: "sidebar", name: "single linkedin link in sidebar", ok: (sidebarBlock.match(/linkedin\.com\/in\/araz-sultanian/g) || []).length === 1 });
+checks.push({ area: "sidebar", name: "cta before social icons", ok: raw.indexOf('class="btn-row"') < raw.indexOf('aria-label="Code and personal links"') });
 checks.push({ area: "site", name: "no resume-meta stack copy", ok: !html.includes("resume-aligned") && !html.includes("icon wall") });
 checks.push({ area: "site", name: "no stack meta copy", ok: !html.includes("logo grid") && !html.includes("grouped by the problems") && !html.includes("same tools behind") });
 const prose = raw.replace(/<script[\s\S]*?<\/script>/gi, "").replace(/<[^>]+>/g, " ");
