@@ -77,7 +77,8 @@ function biasLens(r, lens) {
   record(r, lens, "linkedin primary CTA", html.includes('btn btn-dark btn-lg" target="_blank" rel="noopener">message on linkedin'));
   record(r, lens, "single linkedin in sidebar", sidebarLinkedin === 1);
   record(r, lens, "no fake email icon to linkedin", !sidebarBlock.includes('fa-envelope'));
-  record(r, lens, "pdf download CTA", html.includes('download="araz_sultanian_resume.pdf"'));
+  record(r, lens, "resume pdf CTA", html.includes('download="araz_sultanian_resume.pdf"') && html.includes("resume pdf"));
+  record(r, lens, "single resume download", (rawHtml.match(/download="araz_sultanian_resume\.pdf"/gi) || []).length === 1);
   record(r, lens, "no grad mailto", !html.includes("mailto:arazs@uci.edu"));
   record(r, lens, "approach in mobile dock", html.includes('href="#principles"'));
   record(r, lens, "contact asks what breaks", html.includes("what breaks if it goes wrong"));

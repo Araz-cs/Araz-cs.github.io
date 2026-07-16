@@ -98,8 +98,9 @@ const earlierRows = [...earlier.matchAll(/<div class="chip-row">([\s\S]*?)<\/div
 checks.push({ area: "nav", name: "sidebar has stack link", ok: html.includes('href="#skills"') });
 checks.push({ area: "nav", name: "munger featured metrics >= 2", ok: (html.match(/card-metric/g) || []).length >= 2 });
 checks.push({ area: "nav", name: "section order skills before proof", ok: html.indexOf('id="skills"') < html.indexOf('id="proof"') });
-checks.push({ area: "resume", name: "pdf download in sidebar", ok: html.includes('download="araz_sultanian_resume.pdf"') });
-checks.push({ area: "resume", name: "pdf download in proof", ok: html.includes('proof-link--download') });
+checks.push({ area: "resume", name: "resume pdf in sidebar only", ok: html.includes('download="araz_sultanian_resume.pdf"') && html.includes("resume pdf") });
+checks.push({ area: "resume", name: "single resume download link", ok: (raw.match(/download="Araz_Sultanian_Resume\.pdf"/gi) || []).length === 1 });
+checks.push({ area: "resume", name: "no duplicate download in proof", ok: !html.includes("proof-link--download") });
 checks.push({ area: "resume", name: "no html resume links", ok: !html.includes("araz_sultanian_2026.html") && !html.includes("view resume online") });
 checks.push({ area: "resume", name: "pdf file exists", ok: existsSync(join(root, "docs/resume/Araz_Sultanian_Resume.pdf")) });
 const sidebarBlock = raw.slice(raw.indexOf('id="sidebar"'), raw.indexOf("</aside>")).toLowerCase();
