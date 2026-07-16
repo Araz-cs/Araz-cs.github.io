@@ -97,6 +97,11 @@ function intuitionFlowLens(r, lens) {
   record(r, lens, "flow ends blueprint→contact", html.indexOf('id="blueprint"') < html.indexOf('id="contact"'));
   record(r, lens, "invert principle", html.includes("invert the failure"));
   record(r, lens, "measure principle", html.includes("measure the bottleneck"));
+  const prose = rawHtml.replace(/<script[\s\S]*?<\/script>/gi, "").replace(/<[^>]+>/g, " ");
+  record(r, lens, "no em dash in prose", !prose.includes("—"));
+  record(r, lens, "no arrow glyphs in prose", !/[→↔]/.test(prose));
+  record(r, lens, "no middle-dot separators in prose", !/\s·\s/.test(prose));
+  record(r, lens, "work cards use problem framing", (rawHtml.match(/<strong>problem:<\/strong>/gi) || []).length >= 6);
 }
 
 function principalBarLens(r, lens) {

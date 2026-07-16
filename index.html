@@ -4,7 +4,7 @@
 	<title>Araz Sultanian 2026</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Platform engineer in Seattle — governed releases, reconciliation under load, systems other teams inherit. Judgment starts by inverting what breaks, then proving what moved.">
+	<meta name="description" content="Platform engineer in Seattle. Governed releases, reconciliation under load, systems other teams inherit. I name what breaks before I ship, then prove the metric moved.">
 	<meta name="author" content="Araz Sultanian">
 	<meta name="theme-color" content="#0f1419">
 
@@ -17,14 +17,14 @@
 	<link rel="alternate" type="application/rss+xml" href="/index.xml" />
 
 	<meta property="og:title" content="Araz Sultanian 2026">
-	<meta property="og:description" content="Platform primitives teams inherit — governed release, reconciliation under load, event pipelines that stay correct. Production judgment since 2021 across AAA and Ford.">
+	<meta property="og:description" content="Platform primitives teams inherit. Governed release, reconciliation under load, event pipelines that stay correct. Production judgment since 2021 across AAA and Ford.">
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="https://araz-tech.com/">
 	<meta property="og:image" content="https://araz-cs.github.io/images/profile.jpg">
 
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="Araz Sultanian 2026">
-	<meta name="twitter:description" content="Platform primitives teams inherit — governed release, reconciliation under load. Production judgment since 2021.">
+	<meta name="twitter:description" content="Platform primitives teams inherit. Governed release, reconciliation under load. Production judgment since 2021.">
 
 	<script type="application/ld+json">
 	{
@@ -53,11 +53,11 @@
 
 <aside id="sidebar" class="sidebar d-flex p-4">
 	<div class="main-info w-100">
-		<span class="eyebrow">2026 · Seattle · Platform Engineer</span>
+		<span class="eyebrow">2026, Seattle, Platform Engineer</span>
 		<img src="/images/profile.jpg" class="rounded-circle mb-3" width="148" alt="Araz Sultanian">
 		<h1 class="heading">Araz <span class="highlight">Sultanian</span></h1>
-		<p class="lead">I own the platform layer other teams inherit — governed release, event pipelines, usage-adjacent reconciliation — where a wrong assumption is an incident, not a footnote. At AAA/ClubLabs I went from insurance bind modernization to founding travel products to co-architecting org-wide Safe Deploy; before that, real-time AV orchestration at Ford. UCI CS trained me to argue from invariants; Supplemental Instruction taught me to explain hard ideas without losing the person.</p>
-		<p class="manifesto">How I decide: name the failure mode before the feature, make the safe path the default for whoever inherits the system, and refuse to call it done until the metric moved. I will disagree in review when the design drifts — then document why, ship the constraint, and own the rollback if I am wrong. Snow, trails, and coffee keep the judgment clear.</p>
+		<p class="lead">I own the platform layer other teams inherit: governed release, event pipelines, and reconciliation paths where usage and billing state cannot drift. A wrong assumption there becomes an incident, not a footnote. At AAA through ClubLabs I moved from insurance bind modernization to founding travel products to co-architecting org-wide Safe Deploy. Before that I built real-time AV orchestration at Ford. UCI CS taught me to argue from invariants. Supplemental Instruction taught me to explain hard ideas without losing the person.</p>
+		<p class="manifesto">How I decide: name the failure mode before the feature, make the safe path the default for whoever inherits the system, and refuse to call it done until the metric moved. I will disagree in review when the design drifts. Then I document why, ship the constraint, and own the rollback if I am wrong. Snow, trails, and coffee keep the judgment clear.</p>
 
 		<div class="sidebar-metrics" aria-label="Key proof points">
 			<div class="sidebar-metric"><strong>Since 2021</strong><span>production</span></div>
@@ -99,18 +99,18 @@
 				</div>
 				<div class="signal-item">
 					<span class="signal-value">95%</span>
-					<span class="signal-label">Latency cut · measured first</span>
+					<span class="signal-label">Latency cut, measured first</span>
 				</div>
 				<div class="signal-item">
 					<span class="signal-value">Zero-dt</span>
-					<span class="signal-label">Deploy windows · fail closed</span>
+					<span class="signal-label">Deploy windows, fail closed</span>
 				</div>
 				<div class="signal-item">
 					<span class="signal-value">175k+</span>
-					<span class="signal-label">URLs ranked · Milestone</span>
+					<span class="signal-label">URLs ranked in Milestone</span>
 				</div>
 			</div>
-			<p class="signal-hook">I build systems where state, usage, and releases cannot silently drift — reconciliation paths that surface drift before month close, governed promotion when staging lies, event intake that fails closed under poison load. Judgment starts by inverting what breaks, then proving what moved — seeking infra platform, cloud billing, and distributed backends where correctness compounds.</p>
+			<p class="signal-hook">I build systems where state, usage, and releases cannot silently drift. Reconciliation paths surface drift before month close. Governed promotion kicks in when staging lies. Event intake fails closed under poison load. I start by inverting what breaks, then proving what moved. I want infra platform, cloud billing, and distributed backends where correctness compounds.</p>
 		</div>
 	</section>
 
@@ -119,15 +119,15 @@
 	<section id="platform-work" class="platform-work reveal">
 		<span class="section-kicker">Selected work</span>
 		<h2 class="section-title">What I have built and owned</h2>
-		<p class="section-copy">Not a project gallery — problems I owned end-to-end, the constraint that mattered, the tradeoff I chose, and what moved. Public-safe depth from production; enterprise repos stay private, judgment does not.</p>
+		<p class="section-copy">Each card is a production problem I owned end to end: the constraint that mattered, the tradeoff I chose, and the number that moved. Enterprise repos stay private. The judgment is public.</p>
 
 		<div class="row">
 			<div class="col-lg-6 mb-4">
 				<article class="platform-card platform-card--featured">
 					<div class="icon-wrap"><i class="fas fa-shield-alt"></i></div>
 					<h3>Governed release other squads inherit</h3>
-					<p><strong>Problem:</strong> product teams shipped through different deploy habits — Friday surprises, regional skew, no shared rollback story.<br><strong>What I did:</strong> co-architected zero-downtime Safe Deploy with DynamoDB deploy windows, dual-region AWS CDK promotion, CloudFront routing, and GitHub Actions pipelines — health gates and auto-rollback before any region cut. Wrote runbooks and failure-mode diagrams so the next on-call does not need me in the room.<br><strong>Outcome:</strong> two product organizations adopted it as default; insurance and travel now promote through the same fail-closed path.</p>
-					<p class="card-metric"><strong>Org-wide adoption · zero-downtime default · platform primitives teams inherit</strong></p>
+					<p><strong>Problem:</strong> product teams shipped through different deploy habits. Friday surprises, regional skew, and no shared rollback story.<br><strong>What I did:</strong> co-architected zero-downtime Safe Deploy with DynamoDB deploy windows, dual-region AWS CDK promotion, CloudFront routing, and GitHub Actions pipelines. Health gates and auto-rollback run before any region cut. I wrote runbooks and failure-mode diagrams so the next on-call does not need me in the room.<br><strong>Outcome:</strong> two product organizations adopted it as default. Insurance and travel now promote through the same fail-closed path.</p>
+					<p class="card-metric"><strong>Org-wide adoption, zero-downtime default, platform primitives teams inherit</strong></p>
 					<div class="chip-row">
 						<span class="chip">AWS CDK</span><span class="chip">DynamoDB</span><span class="chip">CloudFront</span><span class="chip">GitHub Actions</span><span class="chip">CloudFormation</span>
 					</div>
@@ -137,8 +137,8 @@
 				<article class="platform-card platform-card--featured">
 					<div class="icon-wrap"><i class="fas fa-file-invoice-dollar"></i></div>
 					<h3>Bind &amp; reconciliation under retry</h3>
-					<p><strong>Problem:</strong> insurance quote-bind lived on legacy PCF; usage-adjacent state drifted under retry and downstream handoff was opaque.<br><strong>What I did:</strong> led PCF → AWS Lambda migration for core bind endpoints on Node.js and TypeScript — API Gateway, MongoDB factory patterns, GitHub Actions guardrails, Missouri Guidewire expansion — idempotency and audit-friendly transitions by default.<br><strong>Outcome:</strong> bind flows stay correct when retries stack; same muscle as metering and revenue-adjacent pipelines where silent drift is unacceptable.</p>
-					<p class="card-metric"><strong>Reconciliation under load · idempotency · audit-friendly state</strong></p>
+					<p><strong>Problem:</strong> insurance quote-bind lived on legacy PCF. Usage-adjacent state drifted under retry and downstream handoff was opaque.<br><strong>What I did:</strong> led migration from PCF to AWS Lambda for core bind endpoints on Node.js and TypeScript. API Gateway, MongoDB factory patterns, GitHub Actions guardrails, and Missouri Guidewire expansion. Idempotency and audit-friendly transitions by default.<br><strong>Outcome:</strong> bind flows stay correct when retries stack. Same discipline as metering and billing pipelines where silent drift is unacceptable.</p>
+					<p class="card-metric"><strong>Reconciliation under load, idempotency, audit-friendly state</strong></p>
 					<div class="chip-row">
 						<span class="chip">TypeScript</span><span class="chip">Node.js</span><span class="chip">AWS Lambda</span><span class="chip">API Gateway</span><span class="chip">MongoDB</span><span class="chip">GitHub Actions</span>
 					</div>
@@ -148,7 +148,7 @@
 				<article class="platform-card">
 					<div class="icon-wrap"><i class="fas fa-bolt"></i></div>
 					<h3>Event intake that fails closed</h3>
-					<p><strong>Problem:</strong> paid-social leads needed real-time CRM handoff without duplicate or poison events polluting Salesforce.<br><strong>What I did:</strong> architected AWS Step Functions and Lambda workflow to Salesforce via Mulesoft — validation, deduplication, and Splunk signals after mapping failure modes at spike load.<br><strong>Outcome:</strong> intent reaches CRM in under five seconds at 99.9% availability; spikes surface in metrics before downstream owners absorb them.</p>
+					<p><strong>Problem:</strong> paid-social leads needed real-time CRM handoff without duplicate or poison events polluting Salesforce.<br><strong>What I did:</strong> architected AWS Step Functions and Lambda workflow to Salesforce via Mulesoft. Validation, deduplication, and Splunk signals after mapping failure modes at spike load.<br><strong>Outcome:</strong> intent reaches CRM in under five seconds at 99.9% availability. Spikes surface in metrics before downstream owners absorb them.</p>
 					<div class="chip-row">
 						<span class="chip">Step Functions</span><span class="chip">AWS Lambda</span><span class="chip">Salesforce</span><span class="chip">Mulesoft</span><span class="chip">Splunk</span>
 					</div>
@@ -158,7 +158,7 @@
 				<article class="platform-card">
 					<div class="icon-wrap"><i class="fas fa-cloud"></i></div>
 					<h3>Real-time orchestration at Ford</h3>
-					<p><strong>Problem:</strong> AV data paths were latency-bound and deploy friction blocked iteration across three services.<br><strong>What I did:</strong> migrated Java microservices to Cloud Run; wired Pub/Sub, gRPC, and WebSocket paths; embedded OAuth/OIDC/JWT and security gates in Tekton before every build.<br><strong>Outcome:</strong> 95% latency cut on transformation, 40% faster deploys — because I measured before each cut and named tradeoffs (cold start vs throughput, sync vs async) in review.</p>
+					<p><strong>Problem:</strong> AV data paths were latency-bound and deploy friction blocked iteration across three services.<br><strong>What I did:</strong> migrated Java microservices to Cloud Run. Wired Pub/Sub, gRPC, and WebSocket paths. Embedded OAuth, OIDC, JWT, and security gates in Tekton before every build.<br><strong>Outcome:</strong> 95% latency cut on transformation and 40% faster deploys because I measured p99 before each cut and named tradeoffs in review: cold start versus throughput, sync versus async.</p>
 					<div class="chip-row">
 						<span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">GCP Cloud Run</span><span class="chip">Pub/Sub</span><span class="chip">gRPC</span><span class="chip">WebSocket</span>
 					</div>
@@ -168,7 +168,7 @@
 				<article class="platform-card">
 					<div class="icon-wrap"><i class="fas fa-calendar-alt"></i></div>
 					<h3>Member scheduling I owned</h3>
-					<p><strong>Problem:</strong> travel appointment booking spanned four channels and could double-book under race without explicit state.<br><strong>What I did:</strong> primary engineer on the booking funnel — AWS Lambda and CDK APIs, Salesforce/Mulesoft contracts, Playwright regression, Splunk production signals. Drove Safe Deploy for API and web paths so promotion matched the platform story.<br><strong>Outcome:</strong> members book in-branch, virtual, phone, or email-advisor without dropped context across service boundaries.</p>
+					<p><strong>Problem:</strong> travel appointment booking spanned four channels and could double-book under race without explicit state.<br><strong>What I did:</strong> primary engineer on the booking funnel with AWS Lambda and CDK APIs, Salesforce and Mulesoft contracts, Playwright regression, and Splunk production signals. Drove Safe Deploy for API and web paths so promotion matched the platform story.<br><strong>Outcome:</strong> members book in-branch, virtual, by phone, or through email-advisor without dropped context across service boundaries.</p>
 					<div class="chip-row">
 						<span class="chip">TypeScript</span><span class="chip">React</span><span class="chip">AWS Lambda</span><span class="chip">Salesforce</span><span class="chip">Mulesoft</span><span class="chip">Playwright</span>
 					</div>
@@ -178,7 +178,7 @@
 				<article class="platform-card platform-card--secondary">
 					<div class="icon-wrap"><i class="fas fa-route"></i></div>
 					<h3>Greenfield surfaces members touch</h3>
-					<p>Founding engineer on embeddable help widget (live chat, offline fallback) and Module Federation travel hub in Enterprise My Account — Vite, React, and MUI shipped architecture through production on shared contracts, not siloed stacks.</p>
+					<p><strong>Problem:</strong> travel members needed help and account context without loading another siloed app.<br><strong>What I did:</strong> founding engineer on embeddable help widget with live chat and offline fallback, plus Module Federation travel hub in Enterprise My Account. Vite, React, and MUI shipped architecture through production on shared contracts.<br><strong>Outcome:</strong> members get help and travel context inside My Account without a separate login path.</p>
 					<div class="chip-row">
 						<span class="chip">React</span><span class="chip">Module Federation</span><span class="chip">Vite</span><span class="chip">MUI</span>
 					</div>
@@ -190,19 +190,19 @@
 	<section id="principles" class="principles reveal">
 		<span class="section-kicker">Approach</span>
 		<h2 class="section-title">How I decide before I ship</h2>
-		<p class="section-copy">Same clarity at 7am or midnight — the process does not change when tired. Invert the failure, find the real constraint, prove the number moved, ship only what survives contact with reality.</p>
+		<p class="section-copy">Same clarity at 7am or midnight. The process does not change when I am tired. Invert the failure, find the real constraint, prove the number moved, ship only what survives contact with production.</p>
 		<div class="row">
 			<div class="col-md-6 col-lg-3 mb-4">
-				<article class="principle-card"><div class="num">01</div><h3>Correctness first</h3><p>Before throughput or clever design — what happens on retry, duplicate delivery, or partial failure? Usage, bind, and billing-adjacent paths cannot tolerate silent drift. I default to explicit state and recoverable errors.</p></article>
+				<article class="principle-card"><div class="num">01</div><h3>Correctness first</h3><p>Before throughput or clever design I ask what happens on retry, duplicate delivery, or partial failure. Usage, bind, and billing paths cannot tolerate silent drift. I default to explicit state and recoverable errors.</p></article>
 			</div>
 			<div class="col-md-6 col-lg-3 mb-4">
-				<article class="principle-card"><div class="num">02</div><h3>Measure the bottleneck</h3><p>Focus beats motivation when the constraint is real — p99 in a transform path, deploy friction blocking three teams, an observability gap hiding retries. Name it, cut it, show the graph moved.</p></article>
+				<article class="principle-card"><div class="num">02</div><h3>Measure the bottleneck</h3><p>Focus beats motivation when the constraint is real: p99 in a transform path, deploy friction blocking three teams, an observability gap hiding retries. Name it, cut it, show the graph moved.</p></article>
 			</div>
 			<div class="col-md-6 col-lg-3 mb-4">
-				<article class="principle-card"><div class="num">03</div><h3>Invert the failure</h3><p>Ask what breaks at 10× traffic, a bad deploy, or a confused downstream owner — then design that version of the story out of existence. Most of my best decisions began as failures I refused to allow.</p></article>
+				<article class="principle-card"><div class="num">03</div><h3>Invert the failure</h3><p>I ask what breaks at 10x traffic, a bad deploy, or a confused downstream owner. Then I design that version of the story out of existence. Most of my best decisions began as failures I refused to allow.</p></article>
 			</div>
 			<div class="col-md-6 col-lg-3 mb-4">
-				<article class="principle-card"><div class="num">04</div><h3>Design for who inherits it</h3><p>Platform work compounds when the next team’s safe path is the easy path — clear contracts, governed releases, honest docs in review. Steady in incident; direct about what the next increment should be. Step in when needed; step back when someone else should lead.</p></article>
+				<article class="principle-card"><div class="num">04</div><h3>Design for who inherits it</h3><p>Platform work compounds when the next team’s safe path is the easy path: clear contracts, governed releases, honest docs in review. I stay steady in incident and direct about the next increment. I step in when needed and step back when someone else should lead.</p></article>
 			</div>
 		</div>
 	</section>
@@ -210,29 +210,29 @@
 	<section id="experience" class="experience-panel reveal">
 		<span class="section-kicker">Career</span>
 		<h2 class="section-title">Where the judgment was forged</h2>
-		<p class="section-copy">Insurance bind → travel founding engineer → cross-org platform. Each step widened scope — from correct state in one flow to constraints other teams design inside.</p>
+		<p class="section-copy">Insurance bind, then travel founding engineer, then cross-org platform. Each step widened scope from correct state in one flow to constraints other teams design inside.</p>
 		<div id="timeline">
 			<div class="timeline-item clearfix">
 				<div class="timeline-icon"></div>
 				<div class="timeline-content right">
-					<span class="date">Jan 2023 – Present</span>
+					<span class="date">Jan 2023 to Present</span>
 					<h6>Full-Stack Engineer</h6>
-					<a target="_blank" href="https://www.linkedin.com/company/aaa-auto-club-enterprises/">AAA Auto Club Enterprises · ClubLabs</a>
+					<a target="_blank" href="https://www.linkedin.com/company/aaa-auto-club-enterprises/">AAA Auto Club Enterprises, ClubLabs</a>
 					<div class="role-block">
 						<strong>Travel digital platform</strong>
 						<ul class="experience-list">
-							<li>I co-architected Safe Deploy so two product orgs promote through the same fail-closed path — deploy windows, dual-region CDK, health gates, runbooks for the on-call I will never meet</li>
-							<li>I owned the travel scheduler booking funnel end-to-end: four appointment channels, explicit state machines, Salesforce/Mulesoft contracts, Playwright and Splunk so retries show up before members feel them</li>
-							<li>I built the paid-social lead pipeline from greenfield — chose Step Functions after mapping poison-message and duplicate-delivery failure modes; under five seconds to CRM at production availability</li>
-							<li>I founded the help widget and travel hub (Module Federation in Enterprise My Account) — architecture through CDN delivery and live-chat fallback, not a handoff spec</li>
+							<li>I co-architected Safe Deploy so two product orgs promote through the same fail-closed path with deploy windows, dual-region CDK, health gates, and runbooks for the on-call I will never meet</li>
+							<li>I owned the travel scheduler booking funnel end to end: four appointment channels, explicit state machines, Salesforce and Mulesoft contracts, Playwright and Splunk so retries show up before members feel them</li>
+							<li>I built the paid-social lead pipeline from greenfield. I chose Step Functions after mapping poison-message and duplicate-delivery failure modes. Under five seconds to CRM at production availability</li>
+							<li>I founded the help widget and travel hub with Module Federation in Enterprise My Account. Architecture through CDN delivery and live-chat fallback, not a handoff spec</li>
 						</ul>
 					</div>
 					<div class="role-block">
-						<strong>Insurance bind &amp; platform primitives</strong>
+						<strong>Insurance bind and platform primitives</strong>
 						<ul class="experience-list">
-							<li>I led PCF → Lambda for core quote-bind endpoints and standardized serverless CI on CDK — the safe path became the default for squads inheriting the repos</li>
-							<li>I drove Elasticsearch → MongoDB and Missouri Guidewire expansion with idempotent handlers and audit-friendly transitions</li>
-							<li>I introduced MSW contract testing at frontend/backend boundaries so integration failures fail in CI, not in member traffic</li>
+							<li>I led PCF to Lambda for core quote-bind endpoints and standardized serverless CI on CDK. The safe path became the default for squads inheriting the repos</li>
+							<li>I drove Elasticsearch to MongoDB and Missouri Guidewire expansion with idempotent handlers and audit-friendly transitions</li>
+							<li>I introduced MSW contract testing at frontend and backend boundaries so integration failures fail in CI, not in member traffic</li>
 						</ul>
 					</div>
 				</div>
@@ -240,14 +240,14 @@
 			<div class="timeline-item clearfix">
 				<div class="timeline-icon"></div>
 				<div class="timeline-content">
-					<span class="date">Jan 2022 – Dec 2022</span>
+					<span class="date">Jan 2022 to Dec 2022</span>
 					<h6>Software Engineer</h6>
 					<a target="_blank" href="https://www.linkedin.com/company/ford-motor-company/">Ford Motor Company</a>
 					<div class="role-block">
-						<strong>AV orchestration · GCP distributed backend</strong>
+						<strong>AV orchestration, GCP distributed backend</strong>
 						<ul class="experience-list">
-							<li>I migrated Java microservices to Cloud Run and wired Pub/Sub, gRPC, and WebSocket for real-time AV orchestration — measured p99 before every cut</li>
-							<li>I embedded OAuth/OIDC/JWT and automated 42Crunch, SonarQube, and Fossa in Tekton so security was a gate, not a ticket</li>
+							<li>I migrated Java microservices to Cloud Run and wired Pub/Sub, gRPC, and WebSocket for real-time AV orchestration. I measured p99 before every cut</li>
+							<li>I embedded OAuth, OIDC, and JWT and automated 42Crunch, SonarQube, and Fossa in Tekton so security was a gate, not a ticket</li>
 							<li>I cut transformation latency 95% and deploy cycles 40% across three services by naming the real bottleneck instead of optimizing noise</li>
 						</ul>
 					</div>
@@ -256,16 +256,16 @@
 			<div class="timeline-item clearfix">
 				<div class="timeline-icon"></div>
 				<div class="timeline-content right">
-					<span class="date">Sep 2019 – Jun 2021</span>
-					<h6>Education &amp; early systems</h6>
+					<span class="date">Sep 2019 to Jun 2021</span>
+					<h6>Education and early systems</h6>
 					<a target="_blank" href="https://www.uci.edu/">University of California, Irvine</a>
 					<div class="role-block">
-						<strong>BS Computer Science · GPA 3.3</strong>
+						<strong>BS Computer Science, GPA 3.3</strong>
 						<ul class="experience-list">
-							<li>Proof-style thinking on state, invariants, and performance under volume — habits I still use in design review</li>
-							<li>Supplemental Instruction Leader for 25+ students — learned to explain distributed concepts without drowning people in jargon</li>
-							<li>Milestone ranked search (175k URLs) and Fabflix commerce (21k titles) — measurement before narrative</li>
-							<li>English (fluent) · Armenian &amp; Arabic (native) — trilingual context for global teams</li>
+							<li>Proof-style thinking on state, invariants, and performance under volume. Habits I still use in design review</li>
+							<li>Supplemental Instruction Leader for 25+ students. I learned to explain distributed concepts without drowning people in jargon</li>
+							<li>Milestone ranked search at 175k URLs and Fabflix commerce at 21k titles. Measurement before narrative</li>
+							<li>English fluent, Armenian and Arabic native. Trilingual context for global teams</li>
 						</ul>
 					</div>
 				</div>
@@ -276,7 +276,7 @@
 	<section id="skills" class="skills-panel reveal">
 		<span class="section-kicker">Stack</span>
 		<h2 class="section-title">What ships in production</h2>
-		<p class="section-copy">Grouped by the problems they solve — governed release, event intake, reconciliation — not a logo grid. Same muscle behind the work above.</p>
+		<p class="section-copy">Grouped by the problems they solve: governed release, event intake, reconciliation. Not a logo grid. Same tools behind the work above.</p>
 		<div class="skill-group">
 			<span class="skill-group-label">Programming languages</span>
 			<div class="skill-tags">
@@ -324,12 +324,12 @@
 	<section id="earlier-work" class="earlier-work reveal">
 		<span class="section-kicker">Earlier Work</span>
 		<h2 class="section-title">Analytical foundations</h2>
-		<p class="section-copy">Where the measurement habit started — real data sizes, real query paths, real consistency constraints. Foundations before production ownership.</p>
+		<p class="section-copy">Where the measurement habit started: real data sizes, real query paths, real consistency constraints. Foundations before production ownership.</p>
 		<div class="row">
 			<div class="col-lg-6 mb-4">
 				<article class="project-card">
 					<h3><a href="https://github.com/Araz-cs/Milestone" target="_blank" rel="noopener">Milestone Search Engine</a></h3>
-					<p>Ranked search across 175,000+ URLs — crawl, index, score, serve on top of spacetime-crawler4py. Early training in algorithmic thinking under volume.</p>
+					<p>Ranked search across 175,000+ URLs. Crawl, index, score, and serve on top of spacetime-crawler4py. Early training in algorithmic thinking under volume.</p>
 					<div class="chip-row">
 						<span class="chip">Java</span><span class="chip">Python</span>
 					</div>
@@ -339,7 +339,7 @@
 			<div class="col-lg-6 mb-4">
 				<article class="project-card">
 					<h3><a href="https://github.com/Araz-cs/Fabflix" target="_blank" rel="noopener">Fabflix</a></h3>
-					<p>Movie commerce at 21,000+ titles — 75% search latency cut (4s to 1s) via query caching; XML-to-CSV ETL reduced 200k-record load 99.7% (30 min to 5 sec); master-slave load balancing for 500+ concurrent users.</p>
+					<p>Movie commerce at 21,000+ titles. Search latency dropped 75% from 4s to 1s via query caching. XML-to-CSV ETL cut 200k-record load time from 30 minutes to 5 seconds. Master-slave load balancing for 500+ concurrent users.</p>
 					<div class="chip-row">
 						<span class="chip">Java</span><span class="chip">MySQL</span><span class="chip">JavaScript</span>
 					</div>
@@ -352,30 +352,30 @@
 	<section id="proof" class="proof reveal">
 		<span class="section-kicker">Corroboration</span>
 		<h2 class="section-title">Verify the depth</h2>
-		<p class="section-copy">Claims should survive cross-check — production footprint, public code, and live products members use. Intellectual honesty starts with evidence you can inspect.</p>
+		<p class="section-copy">Claims should survive cross-check against production footprint, public code, and live products members use. Intellectual honesty starts with evidence you can inspect.</p>
 
 		<div class="row">
 			<div class="col-md-6 col-lg-4 mb-4">
 				<article class="proof-card">
 					<div class="icon-wrap"><i class="fab fa-linkedin"></i></div>
 					<h3>Professional profile</h3>
-					<p>Production since 2021 across AAA and Ford — platform ownership, latency wins, reconciliation-adjacent work you can cross-check.</p>
-					<a class="proof-link" href="https://www.linkedin.com/in/araz-sultanian-2bb10716b/" target="_blank" rel="noopener">linkedin.com/in/araz-sultanian <i class="fas fa-external-link-alt"></i></a>
+					<p>Production since 2021 across AAA and Ford. Platform ownership, latency wins, and reconciliation work you can cross-check on LinkedIn.</p>
+					<a class="proof-link" href="https://www.linkedin.com/in/araz-sultanian-2bb10716b/" target="_blank" rel="noopener">linkedin.com/in/arazsultanian <i class="fas fa-external-link-alt"></i></a>
 				</article>
 			</div>
 			<div class="col-md-6 col-lg-4 mb-4">
 				<article class="proof-card">
 					<div class="icon-wrap"><i class="fab fa-github"></i></div>
 					<h3>Public code</h3>
-					<p>Milestone ranked search and Fabflix commerce — analytical systems that still show how I reason about data at volume.</p>
+					<p>Milestone ranked search and Fabflix commerce. Analytical systems that still show how I reason about data at volume.</p>
 					<a class="proof-link" href="https://github.com/Araz-cs" target="_blank" rel="noopener">github.com/Araz-cs <i class="fas fa-external-link-alt"></i></a>
 				</article>
 			</div>
 			<div class="col-md-6 col-lg-4 mb-4">
 				<article class="proof-card">
 					<div class="icon-wrap"><i class="fas fa-suitcase"></i></div>
-					<h3>AAA · ClubLabs</h3>
-					<p>Digital acceleration at AAA — insurance, travel, roadside. Production systems behind member-facing products; platform patterns align with public ClubLabs pipeline tooling.</p>
+					<h3>AAA, ClubLabs</h3>
+					<p>Digital acceleration at AAA across insurance, travel, and roadside. Production systems behind member-facing products. Platform patterns align with public ClubLabs pipeline tooling.</p>
 					<a class="proof-link" href="https://www.clublabs.com/" target="_blank" rel="noopener">clublabs.com <i class="fas fa-external-link-alt"></i></a><br>
 					<a class="proof-link mt-2" href="https://github.com/clublabs/pcf-pipelines" target="_blank" rel="noopener">pcf-pipelines (public) <i class="fas fa-external-link-alt"></i></a>
 				</article>
@@ -384,7 +384,7 @@
 				<article class="proof-card">
 					<div class="icon-wrap"><i class="fas fa-globe-americas"></i></div>
 					<h3>Live product</h3>
-					<p>AAA Travel — member-facing product this platform supports. Intent through fulfillment in production, not a deck.</p>
+					<p>AAA Travel is the member-facing product this platform supports. Intent through fulfillment in production, not a slide deck.</p>
 					<a class="proof-link" href="https://www.aaa.com/travel" target="_blank" rel="noopener">aaa.com/travel <i class="fas fa-external-link-alt"></i></a>
 				</article>
 			</div>
@@ -392,7 +392,7 @@
 				<article class="proof-card proof-card--resume">
 					<div class="icon-wrap"><i class="fas fa-file-pdf"></i></div>
 					<h3>Araz Sultanian 2026</h3>
-					<p>One-page resume — PDF for recruiters and ATS, HTML for quick view. Same facts as this site.</p>
+					<p>One-page resume as PDF for recruiters and ATS. HTML version for quick scan. Same facts as this site.</p>
 					<a class="proof-link proof-link--download" href="/docs/resume/Araz_Sultanian_Resume.pdf" download="Araz_Sultanian_Resume.pdf"><i class="fas fa-download"></i> Download PDF</a><br>
 					<a class="proof-link mt-2" href="/docs/resume/Araz_Sultanian_2026.html" target="_blank" rel="noopener">View online <i class="fas fa-external-link-alt"></i></a>
 				</article>
@@ -400,8 +400,8 @@
 			<div class="col-md-6 col-lg-4 mb-4">
 				<article class="proof-card">
 					<div class="icon-wrap"><i class="fas fa-code-branch"></i></div>
-					<h3>Milestone · Fabflix</h3>
-					<p>175k URLs ranked · 21k SKUs in commerce — analytical depth from UCI that still holds up.</p>
+					<h3>Milestone and Fabflix</h3>
+					<p>175k URLs ranked and 21k SKUs in commerce. Analytical depth from UCI that still holds up.</p>
 					<a class="proof-link" href="https://github.com/Araz-cs/Milestone" target="_blank" rel="noopener">Milestone repo <i class="fas fa-external-link-alt"></i></a><br>
 					<a class="proof-link mt-2" href="https://github.com/Araz-cs/Fabflix" target="_blank" rel="noopener">Fabflix repo <i class="fas fa-external-link-alt"></i></a>
 				</article>
@@ -411,12 +411,12 @@
 
 	<section id="blueprint" class="blueprint reveal">
 		<span class="section-kicker">Blueprint</span>
-		<h2 class="section-title">Lead to fulfillment — platform spine underneath</h2>
-		<p class="section-copy">One connected system from member intent to governed release — the capstone read after you know how I decide. Public-safe depth when enterprise repos stay private. <strong>Org-wide Safe Deploy · bind flows that reconcile · 95% latency cut at Ford · production since 2021.</strong></p>
+		<h2 class="section-title">Lead to fulfillment, platform spine underneath</h2>
+		<p class="section-copy">One connected system from member intent to governed release. Read this after you know how I decide. Enterprise repos stay private. <strong>Org-wide Safe Deploy, bind flows that reconcile, 95% latency cut at Ford, production since 2021.</strong></p>
 
-		<span class="blueprint-lane-label">Member &amp; product funnel</span>
+		<span class="blueprint-lane-label">Member and product funnel</span>
 		<div class="blueprint-flow" aria-label="Travel platform funnel">
-			<div class="flow-node"><i class="fas fa-funnel-dollar"></i><strong>Lead Generation</strong><span>Paid social → CRM</span></div>
+			<div class="flow-node"><i class="fas fa-funnel-dollar"></i><strong>Lead Generation</strong><span>Paid social to CRM</span></div>
 			<div class="flow-node"><i class="fas fa-route"></i><strong>Travel Advisor</strong><span>Discovery UX</span></div>
 			<div class="flow-node"><i class="fas fa-calendar-alt"></i><strong>Scheduler</strong><span>4 channels</span></div>
 			<div class="flow-node"><i class="fas fa-comments"></i><strong>Help Widget</strong><span>Live chat</span></div>
@@ -424,53 +424,53 @@
 			<div class="flow-node"><i class="fas fa-shield-alt"></i><strong>Safe Deploy</strong><span>Dual-region CDK</span></div>
 		</div>
 
-		<span class="blueprint-lane-label">Backend &amp; platform spine</span>
+		<span class="blueprint-lane-label">Backend and platform spine</span>
 		<div class="blueprint-flow" aria-label="Platform systems spine">
-			<div class="flow-node"><i class="fas fa-bolt"></i><strong>Event intake</strong><span>Brokers &amp; routes</span></div>
-			<div class="flow-node"><i class="fas fa-cogs"></i><strong>Core services</strong><span>Lambda &amp; APIs</span></div>
-			<div class="flow-node"><i class="fas fa-database"></i><strong>State layer</strong><span>Caches &amp; schedulers</span></div>
-			<div class="flow-node"><i class="fas fa-file-invoice-dollar"></i><strong>Usage &amp; bind</strong><span>Reconcile state</span></div>
-			<div class="flow-node"><i class="fas fa-chart-line"></i><strong>Observe</strong><span>Logs &amp; monitors</span></div>
+			<div class="flow-node"><i class="fas fa-bolt"></i><strong>Event intake</strong><span>Brokers and routes</span></div>
+			<div class="flow-node"><i class="fas fa-cogs"></i><strong>Core services</strong><span>Lambda and APIs</span></div>
+			<div class="flow-node"><i class="fas fa-database"></i><strong>State layer</strong><span>Caches and schedulers</span></div>
+			<div class="flow-node"><i class="fas fa-file-invoice-dollar"></i><strong>Usage and bind</strong><span>Reconcile state</span></div>
+			<div class="flow-node"><i class="fas fa-chart-line"></i><strong>Observe</strong><span>Logs and monitors</span></div>
 			<div class="flow-node"><i class="fas fa-code-branch"></i><strong>Release</strong><span>Governed CI/CD</span></div>
 		</div>
 
-		<span class="blueprint-lane-label" id="safe-deploy">Safe deploy — the decision chain, not a hero deploy</span>
+		<span class="blueprint-lane-label" id="safe-deploy">Safe deploy: the decision chain, not a hero deploy</span>
 		<div class="deploy-pipeline" aria-label="Safe deploy pipeline">
 			<div class="deploy-step">
 				<h4>Deploy window ON</h4>
-				<p>I invert the failure first: what if east promotes while west still serves stale? DynamoDB deploy window gates routing accounts before any regional cut.</p>
+				<p>I invert the failure first. What if east promotes while west still serves stale? DynamoDB deploy window gates routing accounts before any regional cut.</p>
 			</div>
 			<div class="deploy-step">
-				<h4>East → health check</h4>
-				<p>CDK promotes to primary region; automated health verification must pass before west is even eligible — fail closed, not hope closed.</p>
+				<h4>East, then health check</h4>
+				<p>CDK promotes to primary region. Automated health verification must pass before west is even eligible. Fail closed, not hope closed.</p>
 			</div>
 			<div class="deploy-step">
-				<h4>Approval → West</h4>
-				<p>Human approval between regions with cross-region replica verification — tradeoff: slower promotion vs. silent skew members would feel.</p>
+				<h4>Approval, then West</h4>
+				<p>Human approval between regions with cross-region replica verification. Tradeoff: slower promotion versus silent skew members would feel.</p>
 			</div>
 			<div class="deploy-step">
-				<h4>Window OFF · rollback</h4>
-				<p>Deploy window closes; failed checks trigger auto-rollback. Two product orgs inherited this as default — constraints other squads design inside.</p>
+				<h4>Window OFF, rollback</h4>
+				<p>Deploy window closes. Failed checks trigger auto-rollback. Two product orgs inherited this as default. Constraints other squads design inside.</p>
 			</div>
 		</div>
 
 		<div class="deploy-detail-grid">
-			<div class="deploy-detail"><strong>What teams inherit</strong><span>Shared safe-deploy stack, CDK constructs, CloudFront cache policy for deployment-phase routing, failure-mode runbooks — platform judgment encoded so the next engineer’s safe path is the easy path.</span></div>
-			<div class="deploy-detail"><strong>What I refused to allow</strong><span>Friday surprise deploys, regional skew without observability, poison events reaching CRM, bind state drifting under retry — each became a constraint in code or pipeline.</span></div>
+			<div class="deploy-detail"><strong>What teams inherit</strong><span>Shared safe-deploy stack, CDK constructs, CloudFront cache policy for deployment-phase routing, and failure-mode runbooks. Platform judgment encoded so the next engineer’s safe path is the easy path.</span></div>
+			<div class="deploy-detail"><strong>What I refused to allow</strong><span>Friday surprise deploys, regional skew without observability, poison events reaching CRM, bind state drifting under retry. Each became a constraint in code or pipeline.</span></div>
 		</div>
 
 		<div class="blueprint-pillars">
 			<div class="pillar-card">
 				<h3>Correctness at scale</h3>
-				<p>Idempotency, deduplication, observability — when state represents usage or money, ambiguity is a bug class, not an edge case.</p>
+				<p>Idempotency, deduplication, and observability. When state represents usage or money, ambiguity is a bug class, not an edge case.</p>
 			</div>
 			<div class="pillar-card">
 				<h3>Measured outcomes</h3>
-				<p>95% latency cut · 40% faster deploys · 99.9% lead-pipeline availability · ranked search at 175k URLs · commerce at 21k SKUs — numbers earned after naming the bottleneck, not decoration.</p>
+				<p>95% latency cut, 40% faster deploys, 99.9% lead-pipeline availability, ranked search at 175k URLs, commerce at 21k SKUs. Numbers earned after naming the bottleneck, not decoration.</p>
 			</div>
 			<div class="pillar-card">
 				<h3>Platform that compounds</h3>
-				<p>CDK constructs, deploy guardrails, and runbooks other squads inherit — leverage is constraints other teams design inside, not hero deploys per service.</p>
+				<p>CDK constructs, deploy guardrails, and runbooks other squads inherit. Leverage is constraints other teams design inside, not hero deploys per service.</p>
 			</div>
 		</div>
 	</section>
@@ -479,7 +479,7 @@
 		<div class="container-fluid px-0">
 			<span class="section-kicker">Contact</span>
 			<h2 class="section-title">If the problem is hard, let’s talk</h2>
-			<p class="section-copy mb-4">I am looking for platform and distributed systems work where correctness, scale, and judgment compound — infra platform, cloud billing, usage and reconciliation pipelines, high-traffic backends. I act with context, document tradeoffs, and own what breaks. Best reach: <a href="https://www.linkedin.com/in/araz-sultanian-2bb10716b/" target="_blank" rel="noopener">LinkedIn</a> or the form below.</p>
+			<p class="section-copy mb-4">I am looking for platform and distributed systems work where correctness, scale, and judgment compound: infra platform, cloud billing, usage and reconciliation pipelines, high-traffic backends. I act with context, document tradeoffs, and own what breaks. Best reach is <a href="https://www.linkedin.com/in/araz-sultanian-2bb10716b/" target="_blank" rel="noopener">LinkedIn</a> or the form below.</p>
 			<form action="https://formspree.io/f/xqkwdovv" method="post">
 				<div class="form-row">
 					<div class="col-md-6 mb-3">

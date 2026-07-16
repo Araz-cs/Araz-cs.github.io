@@ -106,6 +106,10 @@ const resumeHtml = readFileSync(join(root, "docs/resume/Araz_Sultanian_2026.html
 checks.push({ area: "resume-html", name: "no print/save-as-pdf button", ok: !resumeHtml.includes("print / save as pdf") && !resumeHtml.includes("window.print()") });
 checks.push({ area: "resume-html", name: "no self-serve download on resume page", ok: !resumeHtml.includes('download="araz_sultanian_resume.pdf"') });
 checks.push({ area: "site", name: "no resume-meta stack copy", ok: !html.includes("resume-aligned") && !html.includes("icon wall") });
+const prose = raw.replace(/<script[\s\S]*?<\/script>/gi, "").replace(/<[^>]+>/g, " ");
+checks.push({ area: "site", name: "no em dash in prose", ok: !prose.includes("—") });
+checks.push({ area: "site", name: "no arrow glyphs in prose", ok: !/[→↔]/.test(prose) });
+checks.push({ area: "site", name: "six work cards problem framed", ok: (raw.match(/<strong>problem:<\/strong>/gi) || []).length >= 6 });
 
 const failures = checks.filter((c) => !c.ok);
 const result = { totalChecks: checks.length, totalFailures: failures.length, allPassed: failures.length === 0, failures };
