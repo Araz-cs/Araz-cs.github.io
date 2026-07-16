@@ -73,7 +73,7 @@ function biasLens(r, lens) {
 }
 
 function firstPrinciplesLens(r, lens) {
-  const metrics = ["7 yrs", "95%", "175k", "cross-team"];
+  const metrics = ["95%", "175k", "cross-team", "since 2021"];
   record(r, lens, "proof metrics >= 4", metrics.filter((m) => html.includes(m)).length >= 4);
 
   const billingAdjacent = ["metering", "reconcil", "idempotency", "usage", "invoice", "billing"];
@@ -102,6 +102,8 @@ function principalBarLens(r, lens) {
   record(r, lens, "decide before ship title", html.includes("how i decide before i ship"));
   record(r, lens, "leverage / constraints voice", html.includes("leverage") || html.includes("constraints other"));
   record(r, lens, "intellectual honesty signal", html.includes("intellectual honesty") || html.includes("survive cross-check") || html.includes("survive cross"));
+  record(r, lens, "ownership I-voice", (html.match(/\bi (co-architected|owned|led|built|migrated|drove|founded|embedded|cut|introduced|refused)/g) || []).length >= 6);
+  record(r, lens, "no api inventory obsession", !html.includes("12 lambda apis") && !html.includes("12 apis"));
 }
 
 for (let round = 1; round <= ROUNDS; round++) {
