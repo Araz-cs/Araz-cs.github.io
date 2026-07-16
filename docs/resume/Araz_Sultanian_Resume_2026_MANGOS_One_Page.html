@@ -4,6 +4,41 @@
 <meta charset="UTF-8">
 <title>Araz Sultanian 2026</title>
 <style>
+  .resume-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 0.75rem;
+    margin: 0 0 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #f7f7f4;
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
+  }
+  .resume-toolbar a,
+  .resume-toolbar button {
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background: #fff;
+    color: #111;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .resume-toolbar a.primary {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+    font-weight: 700;
+  }
+  @media print {
+    .resume-toolbar { display: none !important; }
+  }
   @page { size: letter; margin: 0.45in 0.55in; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -30,6 +65,12 @@
 </style>
 </head>
 <body>
+
+<div class="resume-toolbar" aria-label="Resume actions">
+  <a class="primary" href="Araz_Sultanian_Resume.pdf" download="Araz_Sultanian_Resume.pdf"><strong>Download PDF</strong></a>
+  <button type="button" onclick="window.print()">Print / Save as PDF</button>
+  <a href="https://araz-tech.com/" target="_blank" rel="noopener">Portfolio</a>
+</div>
 
 <div class="header-name">Araz Sultanian US Citizen</div>
 <div class="header-contact">+1 (818) 632-5657 | araz.sultanian@gmail.com | Seattle, WA | github.com/Araz-cs | linkedin.com/in/arazsultanian | Araz-tech.com</div>

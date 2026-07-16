@@ -67,6 +67,7 @@ function latticeworkLens(r, lens) {
 function biasLens(r, lens) {
   record(r, lens, "featured metrics >= 2", (html.match(/card-metric/g) || []).length >= 2);
   record(r, lens, "linkedin primary CTA", html.includes('btn btn-dark btn-lg" target="_blank" rel="noopener">linkedin'));
+  record(r, lens, "pdf download CTA", html.includes('download="araz_sultanian_resume.pdf"'));
   record(r, lens, "no grad mailto", !html.includes("mailto:arazs@uci.edu"));
   record(r, lens, "approach in mobile dock", html.includes('href="#principles"'));
   record(r, lens, "contact asks what breaks", html.includes("what breaks if it goes wrong"));

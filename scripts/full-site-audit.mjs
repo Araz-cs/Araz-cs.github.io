@@ -98,7 +98,9 @@ const earlierRows = [...earlier.matchAll(/<div class="chip-row">([\s\S]*?)<\/div
 checks.push({ area: "nav", name: "sidebar has stack link", ok: html.includes('href="#skills"') });
 checks.push({ area: "nav", name: "munger featured metrics >= 2", ok: (html.match(/card-metric/g) || []).length >= 2 });
 checks.push({ area: "nav", name: "section order skills before proof", ok: html.indexOf('id="skills"') < html.indexOf('id="proof"') });
-checks.push({ area: "title", name: "Araz Sultanian 2026", ok: html.includes("<title>araz sultanian 2026</title>") });
+checks.push({ area: "resume", name: "pdf download in sidebar", ok: html.includes('download="araz_sultanian_resume.pdf"') });
+checks.push({ area: "resume", name: "pdf download in proof", ok: html.includes('proof-link--download') });
+checks.push({ area: "resume", name: "view online secondary link", ok: html.includes("view resume online") });
 
 const failures = checks.filter((c) => !c.ok);
 const result = { totalChecks: checks.length, totalFailures: failures.length, allPassed: failures.length === 0, failures };

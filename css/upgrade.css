@@ -161,6 +161,37 @@ body.site .sidebar {
   font-size: 0.92rem !important;
 }
 
+.sidebar .btn-resume-pdf {
+  border-radius: 11px;
+  border: 1px solid rgba(201, 162, 39, 0.55);
+  background: rgba(201, 162, 39, 0.14);
+  color: #fff !important;
+  font-weight: 700;
+  padding: 0.55rem 1.1rem !important;
+  font-size: 0.92rem !important;
+}
+
+.sidebar .btn-resume-pdf:hover {
+  background: rgba(201, 162, 39, 0.28);
+  color: #fff !important;
+}
+
+.sidebar .resume-view-link {
+  margin-top: 0.65rem;
+  margin-bottom: 0;
+  font-size: 0.8rem;
+}
+
+.sidebar .resume-view-link a {
+  color: rgba(244, 241, 234, 0.72);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.sidebar .resume-view-link a:hover {
+  color: #fff;
+}
+
 .sidebar img.rounded-circle {
   border: 3px solid rgba(201, 162, 39, 0.42);
   box-shadow: var(--shadow);
@@ -586,6 +617,13 @@ section.contact-panel { background: var(--paper-2); min-height: auto; }
 
 .proof-card a.proof-link + a.proof-link { margin-top: 0.45rem; }
 .proof-card a.proof-link:hover { text-decoration: underline; }
+
+.proof-link--download {
+  font-weight: 700;
+  color: var(--teal-deep) !important;
+}
+
+.proof-link--download i { margin-right: 0.35rem; }
 
 /* Principles */
 .principle-card {
