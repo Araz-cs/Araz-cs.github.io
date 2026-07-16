@@ -31,15 +31,18 @@ async function snap(label, scrollY) {
     const signal = document.getElementById("signal");
     const sidebar = document.getElementById("sidebar");
     const main = document.querySelector(".main-content");
+    const work = document.getElementById("platform-work");
     const sr = signal?.getBoundingClientRect();
     const br = sidebar?.getBoundingClientRect();
     const mr = main?.getBoundingClientRect();
+    const wr = work?.getBoundingClientRect();
     const html = document.documentElement;
     return {
       scrollY: window.scrollY,
-      signal: sr ? { top: sr.top, bottom: sr.bottom, height: sr.height } : null,
-      sidebar: br ? { top: br.top, bottom: br.bottom, height: br.height, position: getComputedStyle(sidebar).position } : null,
+      signal: sr ? { top: sr.top, bottom: sr.bottom, height: sr.height, left: sr.left } : null,
+      sidebar: br ? { top: br.top, bottom: br.bottom, height: br.height, position: getComputedStyle(sidebar).position, width: br.width } : null,
       main: mr ? { top: mr.top, left: mr.left, width: mr.width } : null,
+      work: wr ? { top: wr.top, left: wr.left, visible: wr.top < window.innerHeight && wr.left < window.innerWidth } : null,
       gap: br && mr ? mr.left - br.right : null,
       bodyH: html.scrollHeight,
       vh: window.innerHeight,
@@ -54,11 +57,40 @@ async function snap(label, scrollY) {
     if (xOverlap) issues.push(`${label}: signal overlaps sidebar horizontally`);
   }
   if (data.hScroll) issues.push(`${label}: horizontal scroll`);
+  if (label === "top" && data.work && !data.work.visible) issues.push("top: main work section not visible beside sidebar on desktop");
+  if (label === "top" && data.signal && data.sidebar && data.signal.left < data.sidebar.width - 2) {
+    issues.push("top: signal strip not offset into main column");
+  }
 }
 
 await snap("top", 0);
 await snap("mid", 1200);
 await snap("deep", 3500);
+
+const sidebarAccess = await page.evaluate(() => {
+  const sidebar = document.getElementById("sidebar");
+  const btnRow = document.querySelector(".sidebar .btn-row");
+  if (!sidebar || !btnRow) return { ok: false, reason: "missing nodes" };
+  const overflowY = getComputedStyle(sidebar).overflowY;
+  sidebar.scrollTop = 0;
+  const needsScroll = sidebar.scrollHeight > sidebar.clientHeight + 2;
+  sidebar.scrollTop = sidebar.scrollHeight;
+  const btnBottom = btnRow.getBoundingClientRect().bottom;
+  const sidebarBottom = sidebar.getBoundingClientRect().bottom;
+  return {
+    overflowY,
+    needsScroll,
+    btnReachable: btnBottom <= sidebarBottom + 2,
+  };
+});
+
+console.log("\nSIDEBAR ACCESS:", JSON.stringify(sidebarAccess, null, 2));
+if (!["auto", "scroll", "overlay"].includes(sidebarAccess.overflowY)) {
+  issues.push(`sidebar overflow-y is ${sidebarAccess.overflowY}, expected scrollable`);
+}
+if (sidebarAccess.needsScroll && !sidebarAccess.btnReachable) {
+  issues.push("sidebar buttons not reachable after scroll");
+}
 
 console.log("\nISSUES:", issues.length ? issues.join("\n") : "none");
 await browser.close();
