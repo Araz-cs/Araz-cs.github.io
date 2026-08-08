@@ -97,7 +97,11 @@ function principalBarLens(r, lens) {
   record(r, lens, "downstream owner thinking", html.includes("downstream"));
   record(r, lens, "platform primitives chip", html.includes("platform primitives"));
   record(r, lens, "decide before ship title", html.includes("how i decide before i ship"));
-  record(r, lens, "leverage / constraints voice", html.includes("leverage") || html.includes("constraints other"));
+  // Deliberately dropped "leverage is the constraint..." consulting-deck phrasing in favor of
+  // plain first-person voice, calibrated against real Google-Seattle SWE personal sites researched
+  // for this pass (they write "i'd rather..." / "i try to..." not "my leverage is the constraint").
+  record(r, lens, "plain first-person voice (no forced jargon)", html.includes("i'd rather") || html.includes("i try to"));
+  record(r, lens, "no corporate-deck fluff words", !html.includes("governed") && !html.includes("audit-friendly") && !html.includes("correctness-critical") && !html.includes("public-safe"));
   record(r, lens, "intellectual honesty signal", html.includes("intellectual honesty") || html.includes("survive cross-check") || html.includes("survive cross"));
 }
 

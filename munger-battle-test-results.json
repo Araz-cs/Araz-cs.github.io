@@ -9,7 +9,7 @@
     "intuition-flow",
     "principal-bar"
   ],
-  "totalChecks": 400,
+  "totalChecks": 410,
   "totalFailures": 0,
   "allPassed": true,
   "byLens": {
@@ -34,7 +34,7 @@
       "failed": 0
     },
     "principal-bar": {
-      "total": 80,
+      "total": 90,
       "failed": 0
     }
   },
