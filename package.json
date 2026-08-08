@@ -1,4 +1,14 @@
 {
+  "name": "araz-portfolio",
+  "private": true,
+  "description": "Dev tooling for araz-tech.com — Playwright-based UX and copy-quality checks.",
+  "scripts": {
+    "test:ux": "node scripts/full-ux-audit.mjs",
+    "test:smoke": "node scripts/ux-smoke-test.mjs",
+    "test:mobile": "node scripts/mobile-audit.mjs",
+    "test:copy": "node scripts/munger-battle-test.mjs",
+    "test": "npm run test:copy && npm run test:smoke && npm run test:ux && npm run test:mobile"
+  },
   "devDependencies": {
     "playwright": "^1.62.1"
   }
