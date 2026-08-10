@@ -142,7 +142,7 @@
 				<article class="platform-card">
 					<div class="icon-wrap"><i class="fas fa-bolt"></i></div>
 					<h3>Event-driven services</h3>
-					<p>Brokers, handlers, deduplication, and logs built to catch a problem before a person does — the runtime behind bind, scheduling, and intake. When traffic spikes or a message goes bad, it shows up on a dashboard before a member or a billing job downstream ever feels it.</p>
+					<p>Brokers, handlers, deduplication, and logs built to catch a bad message before a person does — the runtime behind bind, scheduling, and intake. When traffic spikes or a message goes bad, it shows up on a dashboard before a member or a billing job downstream ever feels it.</p>
 					<div class="chip-row">
 						<span class="chip">Event-driven</span><span class="chip">AWS Lambda</span><span class="chip">Observability</span><span class="chip">Microservices</span>
 					</div>
@@ -184,7 +184,7 @@
 	<section id="principles" class="principles reveal">
 		<span class="section-kicker">Approach</span>
 		<h2 class="section-title">How I decide before I ship</h2>
-		<p class="section-copy">Same process whether it's 7am or midnight and I'm tired. Think about what breaks first, find the actual bottleneck, prove the graph moved, and only ship what survives contact with reality.</p>
+		<p class="section-copy">Same process whether it's 7am or midnight and I'm tired. Think about what breaks first, find the bottleneck, prove the graph moved, and only ship what survives contact with reality.</p>
 		<div class="row">
 			<div class="col-md-6 col-lg-3 mb-4">
 				<article class="principle-card"><div class="num">01</div><h3>Correctness first</h3><p>Before I think about speed or clever design, I ask: what happens on a retry, a duplicate delivery, a partial failure? Usage and billing-adjacent paths can't quietly drift, so I default to explicit state and errors I can recover from.</p></article>
@@ -204,7 +204,7 @@
 	<section id="platform" class="blueprint reveal">
 		<span class="section-kicker">Platform</span>
 		<h2 class="section-title">The spine underneath</h2>
-		<p class="section-copy">One system, start to finish — from the first event in to a release going out. This is how I think about ownership when the actual repos are private, but I still need to be able to explain the architecture out loud.</p>
+		<p class="section-copy">One system, start to finish — from the first event in to a release going out. This is how I think about ownership when the repos themselves are private, but I still need to be able to explain the architecture out loud.</p>
 
 		<span class="blueprint-lane-label">Backend &amp; platform spine</span>
 		<div class="blueprint-flow" aria-label="Platform systems spine">
@@ -449,7 +449,7 @@
 	<section id="contact" class="contact-panel d-flex align-items-center reveal">
 		<div class="container-fluid px-0">
 			<span class="section-kicker">Contact</span>
-			<h2 class="section-title">If the problem is hard, let’s talk</h2>
+			<h2 class="section-title">If it breaks quietly, let’s talk</h2>
 			<p class="section-copy mb-4">I'm looking for platform and distributed-systems roles — backend, infra, anything billing- or usage-adjacent where a wrong number is a real problem. If you're building something where the state can't afford to drift, I'd like to hear about it. Best way to reach me: <a href="https://www.linkedin.com/in/araz-sultanian-2bb10716b/" target="_blank" rel="noopener">LinkedIn</a>, or the form below.</p>
 			<form action="https://formspree.io/f/xqkwdovv" method="post">
 				<div class="form-row">
