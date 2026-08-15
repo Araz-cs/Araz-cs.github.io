@@ -46,7 +46,7 @@ const CARD_BODY_CHIP_RULES = [
   },
   {
     label: "SafeDeploy",
-    h3: "governed release",
+    h3: "safe deploy other squads inherit",
     requiredInBodyOrChip: ["dynamodb", "cdk", "github actions"],
     forbiddenChips: ["java", "spring"],
   },

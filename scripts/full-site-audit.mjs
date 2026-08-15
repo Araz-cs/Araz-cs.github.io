@@ -30,7 +30,7 @@ const RESUME_STACK = {
 };
 
 const CARD_MARKERS = [
-  { label: "SafeDeploy", start: "governed release" },
+  { label: "SafeDeploy", start: "safe deploy other squads inherit" },
   { label: "Bind", start: "bind &amp; reconciliation" },
   { label: "Event", start: "event intake" },
   { label: "Ford", start: "real-time orchestration" },
