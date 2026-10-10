@@ -9,32 +9,32 @@
     "intuition-flow",
     "principal-bar"
   ],
-  "totalChecks": 350,
+  "totalChecks": 670,
   "totalFailures": 0,
   "allPassed": true,
   "byLens": {
     "inversion": {
-      "total": 70,
+      "total": 170,
       "failed": 0
     },
     "latticework": {
-      "total": 50,
+      "total": 70,
       "failed": 0
     },
     "bias": {
-      "total": 60,
+      "total": 130,
       "failed": 0
     },
     "first-principles": {
-      "total": 50,
+      "total": 70,
       "failed": 0
     },
     "intuition-flow": {
-      "total": 60,
+      "total": 100,
       "failed": 0
     },
     "principal-bar": {
-      "total": 60,
+      "total": 130,
       "failed": 0
     }
   },

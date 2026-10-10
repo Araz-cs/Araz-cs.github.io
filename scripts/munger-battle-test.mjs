@@ -29,29 +29,39 @@ function inversionLens(r, lens) {
   const mainIdx = html.indexOf("<main");
   record(r, lens, "sidebar before signal in DOM", sidebarIdx >= 0 && sidebarIdx < signalIdx);
   record(r, lens, "signal before main in DOM", signalIdx >= 0 && signalIdx < mainIdx);
-  record(r, lens, "mobile keeps full bio", !/\.sidebar \.lead[\s\S]{0,80}display:\s*none/.test(rawCss));
+  record(r, lens, "mobile keeps full bio", !/\.sidebar \.lead-full[\s\S]{0,80}display:\s*none/.test(rawCss) || /max-width:\s*992px[\s\S]*\.sidebar \.lead-full[\s\S]*display:\s*block/.test(rawCss));
   record(r, lens, "mobile keeps signal hook", !/\.signal-hook\s*\{[^}]*display:\s*none/.test(rawCss));
 
   const workIdx = html.indexOf('id="platform-work"');
-  const platformIdx = html.indexOf('id="platform"');
+  const blueprintIdx = html.indexOf('id="blueprint"');
   const principlesIdx = html.indexOf('id="principles"');
   const expIdx = html.indexOf('id="experience"');
   const proofIdx = html.indexOf('id="proof"');
+  const contactIdx = html.indexOf('id="contact"');
 
-  record(r, lens, "work before platform", workIdx < platformIdx);
-  record(r, lens, "approach before platform", principlesIdx < platformIdx);
+  record(r, lens, "work before blueprint", workIdx < blueprintIdx);
+  record(r, lens, "approach before blueprint", principlesIdx < blueprintIdx);
+  record(r, lens, "blueprint before contact", blueprintIdx < contactIdx);
   record(r, lens, "experience before corroboration", expIdx < proofIdx);
-  record(r, lens, "no see-blueprint-above", !html.includes("see blueprint above"));
-  record(r, lens, "depth behind disclosure", html.includes("platform-expand"));
+  record(r, lens, "skills before corroboration", html.indexOf('id="skills"') < proofIdx);
+  record(r, lens, "stack before proof links", html.indexOf('id="earlier-work"') < proofIdx);
+  record(r, lens, "no resume-meta in stack", !html.includes("resume-aligned") && !html.includes("icon wall") && !html.includes("tools from my 2026 resume"));
+  record(r, lens, "stack judgment voice", html.includes("what ships in production"));
+  record(r, lens, "no stack meta copy", !html.includes("logo grid") && !html.includes("grouped by the problems") && !html.includes("same tools behind"));
+  record(r, lens, "blueprint deploy pipeline visible", html.includes("deploy-pipeline"));
+  record(r, lens, "desktop sidebar scrollable", /min-width:\s*993px\)[\s\S]*body\.site \.sidebar[\s\S]*overflow-y:\s*auto/.test(rawCss));
+  record(r, lens, "desktop compact sidebar", /min-width:\s*993px\)[\s\S]*\.lead-full[\s\S]*display:\s*none/.test(rawCss));
   record(r, lens, "product card deprioritized", html.includes("platform-card--secondary"));
 }
 
 function latticeworkLens(r, lens) {
-  const heroLead = html.match(/class="lead"[^>]*>([^<]+)/)?.[1] || "";
+  const heroLead = html.match(/class="lead[^"]*"[^>]*>([^<]+)/)?.[1] || "";
   record(r, lens, "hero platform ownership", /platform layer|platform engineer|own the platform/.test(heroLead));
 
   const signalHook = html.match(/class="signal-hook"[^>]*>([^<]+)/)?.[1] || "";
   record(r, lens, "billing platform signal", /billing|reconcil|usage/.test(signalHook));
+  record(r, lens, "signal hook human voice", /the breaks that cost you|usually quiet|month close tells you/.test(signalHook));
+  record(r, lens, "no robotic signal list", !signalHook.includes("cannot silently drift") && !signalHook.includes("correctness compounds"));
   record(r, lens, "decision model in strip", /invert|decide|judgment/.test(signalHook));
 
   const workBlock = html.slice(html.indexOf('id="platform-work"'), html.indexOf('id="principles"'));
@@ -62,16 +72,26 @@ function latticeworkLens(r, lens) {
 
 function biasLens(r, lens) {
   record(r, lens, "featured metrics >= 2", (html.match(/card-metric/g) || []).length >= 2);
-  record(r, lens, "linkedin primary CTA", html.includes('btn btn-dark btn-lg" target="_blank" rel="noopener">linkedin'));
+  const sidebarBlock = rawHtml.slice(rawHtml.indexOf('id="sidebar"'), rawHtml.indexOf("</aside>")).toLowerCase();
+  const sidebarLinkedin = (sidebarBlock.match(/linkedin\.com\/in\/araz-sultanian/g) || []).length;
+  record(r, lens, "linkedin primary CTA", html.includes('btn btn-dark btn-lg" target="_blank" rel="noopener">message on linkedin'));
+  record(r, lens, "single linkedin in sidebar", sidebarLinkedin === 1);
+  record(r, lens, "no fake email icon to linkedin", !sidebarBlock.includes('fa-envelope'));
+  record(r, lens, "resume pdf CTA", html.includes('download="araz_sultanian_resume.pdf"') && html.includes("resume pdf"));
+  record(r, lens, "single resume download", (rawHtml.match(/download="araz_sultanian_resume\.pdf"/gi) || []).length === 1);
   record(r, lens, "no grad mailto", !html.includes("mailto:arazs@uci.edu"));
   record(r, lens, "approach in mobile dock", html.includes('href="#principles"'));
   record(r, lens, "contact asks what breaks", html.includes("what breaks if it goes wrong"));
-  record(r, lens, "nav approach before platform", html.indexOf('href="#principles"') < html.indexOf('href="#platform"'));
+  record(r, lens, "nav approach before blueprint", html.indexOf('href="#principles"') < html.indexOf('href="#blueprint"'));
+  record(r, lens, "nav has stack link", html.includes('href="#skills"'));
+  record(r, lens, "blueprint in mobile dock", html.includes('href="#blueprint"'));
+  record(r, lens, "stack in mobile dock", html.includes('href="#skills"'));
 }
 
 function firstPrinciplesLens(r, lens) {
-  const metrics = ["7 yrs", "95%", "175k", "cross-team"];
+  const metrics = ["95%", "175k", "7 yr", "since 2021"];
   record(r, lens, "proof metrics >= 4", metrics.filter((m) => html.includes(m)).length >= 4);
+  record(r, lens, "seven years pill", html.includes("7 yrs"));
 
   const billingAdjacent = ["metering", "reconcil", "idempotency", "usage", "invoice", "billing"];
   record(r, lens, "billing-adjacent terms >= 4", billingAdjacent.filter((s) => text.includes(s)).length >= 4);
@@ -79,15 +99,21 @@ function firstPrinciplesLens(r, lens) {
   record(r, lens, "milestone before fabflix", html.indexOf("milestone") < html.indexOf("fabflix"));
   record(r, lens, "human manifesto", html.includes("snow") && html.includes("coffee"));
   record(r, lens, "how i decide voice", html.includes("how i decide"));
+  record(r, lens, "einstein collective quote", html.includes("labors of other men") && html.includes("albert einstein"));
 }
 
 function intuitionFlowLens(r, lens) {
   record(r, lens, "flow signal→work", html.indexOf('id="signal"') < html.indexOf('id="platform-work"'));
   record(r, lens, "flow work→approach", html.indexOf('id="platform-work"') < html.indexOf('id="principles"'));
-  record(r, lens, "flow approach→platform", html.indexOf('id="principles"') < html.indexOf('id="platform"'));
-  record(r, lens, "flow platform→experience", html.indexOf('id="platform"') < html.indexOf('id="experience"'));
+  record(r, lens, "flow approach→experience", html.indexOf('id="principles"') < html.indexOf('id="experience"'));
+  record(r, lens, "flow ends blueprint→contact", html.indexOf('id="blueprint"') < html.indexOf('id="contact"'));
   record(r, lens, "invert principle", html.includes("invert the failure"));
   record(r, lens, "measure principle", html.includes("measure the bottleneck"));
+  const prose = rawHtml.replace(/<script[\s\S]*?<\/script>/gi, "").replace(/<[^>]+>/g, " ");
+  record(r, lens, "no em dash in prose", !prose.includes("—"));
+  record(r, lens, "no arrow glyphs in prose", !/[→↔]/.test(prose));
+  record(r, lens, "no middle-dot separators in prose", !/\s·\s/.test(prose));
+  record(r, lens, "work cards use problem framing", (rawHtml.match(/<strong>problem:<\/strong>/gi) || []).length >= 6);
 }
 
 function principalBarLens(r, lens) {
@@ -99,6 +125,11 @@ function principalBarLens(r, lens) {
   record(r, lens, "decide before ship title", html.includes("how i decide before i ship"));
   record(r, lens, "leverage / constraints voice", html.includes("leverage") || html.includes("constraints other"));
   record(r, lens, "intellectual honesty signal", html.includes("intellectual honesty") || html.includes("survive cross-check") || html.includes("survive cross"));
+  record(r, lens, "ownership I-voice", (html.match(/\bi (co-architected|owned|led|built|migrated|drove|founded|embedded|cut|introduced|refused)/g) || []).length >= 6);
+  record(r, lens, "no api inventory obsession", !html.includes("12 lambda apis") && !html.includes("12 apis"));
+  record(r, lens, "simple page title", html.includes("<title>araz sultanian 2026</title>"));
+  record(r, lens, "resume pdf path", html.includes("/docs/resume/araz_sultanian_resume.pdf"));
+  record(r, lens, "no html resume links", !html.includes("araz_sultanian_2026.html"));
 }
 
 for (let round = 1; round <= ROUNDS; round++) {

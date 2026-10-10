@@ -48,16 +48,17 @@ const bioVisible = await page.evaluate(() => {
   const manifesto = document.querySelector(".sidebar .manifesto");
   return !!(lead && manifesto && getComputedStyle(lead).display !== "none" && getComputedStyle(manifesto).display !== "none");
 });
-const principlesBeforePlatform = await page.evaluate(() => {
+const principlesBeforeBlueprint = await page.evaluate(() => {
   const p = document.getElementById("principles");
-  const plat = document.getElementById("platform");
-  return p && plat ? p.offsetTop < plat.offsetTop : false;
+  const bp = document.getElementById("blueprint");
+  const contact = document.getElementById("contact");
+  return p && bp && contact ? p.offsetTop < bp.offsetTop && bp.offsetTop < contact.offsetTop : false;
 });
 const workTitle = await page.locator("#platform-work .section-title").isVisible();
 const workTop = await page.locator("#platform-work").evaluate((el) => el.getBoundingClientRect().top);
-const platformTop = await page.locator("#platform").evaluate((el) => el.getBoundingClientRect().top);
+const blueprintTop = await page.locator("#blueprint").evaluate((el) => el.getBoundingClientRect().top);
 const featured = await page.locator(".platform-card--featured").count();
-const noBlueprintAbove = workTop < platformTop;
+const workBeforeBlueprint = workTop < blueprintTop;
 
 await page.locator('.mobile-dock a[href="#contact"]').click();
 await page.waitForTimeout(400);
@@ -73,8 +74,8 @@ const checks = [
   ["person first: sidebar → signal → work", personFirst],
   ["full bio visible on mobile", bioVisible],
   ["mobile work visible", workTitle],
-  ["approach before platform", principlesBeforePlatform],
-  ["work before platform", noBlueprintAbove],
+  ["approach before blueprint finale", principlesBeforeBlueprint],
+  ["work before blueprint", workBeforeBlueprint],
   ["featured cards >= 2", featured >= 2],
   ["contact submit visible", submitVisible],
   ["submit above dock", submitAboveDock],
